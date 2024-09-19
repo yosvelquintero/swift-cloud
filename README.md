@@ -64,4 +64,4 @@ This project was built using the [NestJS](https://nestjs.com) framework. Below a
 
 ## License
 
-SwiftCloud is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+SwiftCloud is [MIT licensed](https://opensource.org/licenses/MIT).
