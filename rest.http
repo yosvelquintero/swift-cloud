@@ -1,0 +1,233 @@
+### Amadeus
+@serverHostname = localhost
+@serverPort = 3000
+@api = /api
+@serverUrl = http://{{serverHostname}}:{{serverPort}}
+@contentType = application/json
+
+# ------------------------------------------------------------
+# Albums
+# ------------------------------------------------------------
+
+###
+### Get all albums
+###
+
+GET {{serverUrl}}{{api}}/v1/albums
+Content-Type: {{contentType}}
+
+###
+### Get album by id
+###
+
+GET {{serverUrl}}{{api}}/v1/albums/66ee7f988fb757ad3cd5fcd2
+Content-Type: {{contentType}}
+
+###
+### Post album
+###
+
+POST {{serverUrl}}{{api}}/v1/albums
+Content-Type: {{contentType}}
+
+{
+  "title": "Folklore",
+  "artists": ["66ecf9985c84b0caebe28395"],
+  "songs": ["66ed36392d92e217c6d91380"],
+  "year": 2024
+}
+
+###
+### Patch album by id
+###
+
+PATCH {{serverUrl}}{{api}}/v1/albums/66ee7f988fb757ad3cd5fcd2
+Content-Type: {{contentType}}
+
+{
+  "title": "Folklore [Edited]",
+  "artists": ["66ed47e7225dfbd77e8426d8"],
+  "songs": ["66ee472fa0048ca181a5bc0b"]
+}
+
+###
+### Delete album by id
+###
+
+DELETE {{serverUrl}}{{api}}/v1/albums/66ece356c94052f125f421ad
+Content-Type: {{contentType}}
+
+###
+
+# ------------------------------------------------------------
+# Artists
+# ------------------------------------------------------------
+
+###
+### Get all artists
+###
+
+
+GET {{serverUrl}}{{api}}/v1/artists
+Content-Type: {{contentType}}
+
+###
+### Get artist by id
+###
+
+
+GET {{serverUrl}}{{api}}/v1/artists/66ed3ab2b44bec6d3e258b42
+Content-Type: {{contentType}}
+
+###
+### Post artist
+###
+
+POST {{serverUrl}}{{api}}/v1/artists
+Content-Type: {{contentType}}
+
+{
+  "name": "Michael Jackson"
+}
+
+###
+### Patch artist by id
+###
+
+PATCH  {{serverUrl}}{{api}}/v1/artists/66ed47e7225dfbd77e8426d8
+Content-Type: {{contentType}}
+
+{
+  "name": "Taylor Swift [Edited artist]"
+}
+
+###
+### Delete artist by id
+###
+
+DELETE {{serverUrl}}{{api}}/v1/artists/66ec514ca18c89e6fdd3d3ed
+Content-Type: {{contentType}}
+
+###
+
+# ------------------------------------------------------------
+# Songs
+# ------------------------------------------------------------
+
+###
+### Get all songs
+###
+
+
+GET {{serverUrl}}{{api}}/v1/songs
+Content-Type: {{contentType}}
+
+###
+### Get song by id
+###
+
+
+GET {{serverUrl}}{{api}}/v1/songs/66ee472fa0048ca181a5bc0b
+Content-Type: {{contentType}}
+
+###
+### Get songs by year
+###
+
+GET {{serverUrl}}{{api}}/v1/songs/year/2024
+Content-Type: {{contentType}}
+
+###
+### Post song
+###
+
+POST {{serverUrl}}{{api}}/v1/songs
+Content-Type: {{contentType}}
+
+{
+  "title": "The 1",
+  "artists": ["66ed47e7225dfbd77e8426d8"],
+  "writers": ["66ee4d50b5fb8c9e43d5b767", "66ee4d41b5fb8c9e43d5b763", "66ee4d38b5fb8c9e43d5b75f"],
+  "year": 2024,
+  "plays": [
+    {
+      "month": "2024-06-01",
+      "count": 62
+    },
+    {
+      "month": "2024-07-01",
+      "count": 69
+    }
+  ]
+}
+
+###
+### Patch song by id
+###
+
+PATCH  {{serverUrl}}{{api}}/v1/songs/66ee472fa0048ca181a5bc0b
+Content-Type: {{contentType}}
+
+{
+  "title": "The 1 [Edited]"
+}
+
+###
+### Delete song by id
+###
+
+DELETE {{serverUrl}}{{api}}/v1/songs/66ed052980ce8ca46d5f40f4
+Content-Type: {{contentType}}
+
+###
+
+# ------------------------------------------------------------
+# Writers
+# ------------------------------------------------------------
+
+###
+### Get all writers
+###
+
+
+GET {{serverUrl}}{{api}}/v1/writers
+Content-Type: {{contentType}}
+
+###
+### Get writer by id
+###
+
+
+GET {{serverUrl}}{{api}}/v1/writers/66ed3a05b44bec6d3e258b28
+Content-Type: {{contentType}}
+
+###
+### Post writer
+###
+
+POST {{serverUrl}}{{api}}/v1/writers
+Content-Type: {{contentType}}
+
+{
+  "name": "Taylor Swift"
+}
+
+###
+### Patch writer by id
+###
+
+PATCH  {{serverUrl}}{{api}}/v1/writers/66ed3a05b44bec6d3e258b28
+Content-Type: {{contentType}}
+
+{
+  "name": "Taylor Swift [Edited Writer]"
+}
+
+###
+### Delete writer by id
+###
+
+DELETE {{serverUrl}}{{api}}/v1/writers/66ed47d3225dfbd77e8426cf
+Content-Type: {{contentType}}
+
+###
