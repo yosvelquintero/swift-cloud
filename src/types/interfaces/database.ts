@@ -7,6 +7,12 @@ export interface IDatabase {
         songs: string;
         writers: string;
       };
+      populates: {
+        albums: string;
+        artists: string;
+        songs: string;
+        writers: string;
+      };
       refs: {
         album: string;
         artist: string;
