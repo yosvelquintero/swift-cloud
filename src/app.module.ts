@@ -2,9 +2,11 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ENV } from './config/constants';
+import { AlbumsModule } from './modules/albums/albums.module';
+import { ArtistsModule } from './modules/artists/artists.module';
+import { SongsModule } from './modules/songs/songs.module';
+import { WritersModule } from './modules/writers/writers.module';
 
 @Module({
   imports: [
@@ -15,8 +17,12 @@ import { ENV } from './config/constants';
         uri: configService.get<string>(ENV.database.mongodb.mongodbUri),
       }),
     }),
+    AlbumsModule,
+    SongsModule,
+    ArtistsModule,
+    WritersModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
