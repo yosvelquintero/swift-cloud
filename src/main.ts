@@ -35,7 +35,7 @@ async function bootstrap() {
     const swaggerUrl = `${api.host}:${api.port}${api.swagger.prefix}`;
 
     if (isSwaggerEnabled) {
-      logger.log(`Swagger API documentation available at: ${swaggerUrl}`);
+      logger.log(`Swagger API documentation: ${swaggerUrl}`);
     }
 
     logger.log(`Application running at: ${apiUrl}`);
