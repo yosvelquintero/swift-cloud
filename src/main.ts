@@ -24,7 +24,7 @@ async function bootstrap() {
   const logger = new Logger(api.name);
   const isSwaggerEnabled = api.isSwaggerEnabled === 'true';
 
-  settingsConfig(api.prefix, app);
+  settingsConfig(app, api.prefix);
 
   if (isSwaggerEnabled) {
     swaggerConfig(app, api);

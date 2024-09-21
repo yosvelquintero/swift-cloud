@@ -9,7 +9,7 @@ import helmet from 'helmet';
 
 import { ValidationErrorFilter } from '@app/filters';
 
-export const settingsConfig = (prefix: string, app: INestApplication): void => {
+export const settingsConfig = (app: INestApplication, prefix: string): void => {
   // Security middleware using Helmet
   app.use(helmet());
 
