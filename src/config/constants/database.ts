@@ -11,6 +11,12 @@ export const DATABASE: DeepReadonly<IDatabase> = {
         songs: 'dev.songs',
         writers: 'dev.writers',
       },
+      populates: {
+        albums: 'albums',
+        artists: 'artists',
+        songs: 'songs',
+        writers: 'writers',
+      },
       refs: {
         album: 'Album',
         artist: 'Artist',
