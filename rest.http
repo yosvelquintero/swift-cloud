@@ -10,17 +10,17 @@
 # ------------------------------------------------------------
 
 ###
-### Get all albums
+### Get paginated albums
 ###
 
-GET {{serverUrl}}{{api}}/v1/albums
+GET {{serverUrl}}{{api}}/v1/albums?page=1&limit=10&field=title&sort=ASC
 Content-Type: {{contentType}}
 
 ###
 ### Get album by id
 ###
 
-GET {{serverUrl}}{{api}}/v1/albums/66ee7f988fb757ad3cd5fcd2
+GET {{serverUrl}}{{api}}/v1/albums/66ef2343b19f5217d5e9b60c
 Content-Type: {{contentType}}
 
 ###
@@ -64,11 +64,11 @@ Content-Type: {{contentType}}
 # ------------------------------------------------------------
 
 ###
-### Get all artists
+### Get paginated artists
 ###
 
 
-GET {{serverUrl}}{{api}}/v1/artists
+GET {{serverUrl}}{{api}}/v1/artists?page=1&limit=10&field=name&sort=ASC
 Content-Type: {{contentType}}
 
 ###
@@ -87,14 +87,14 @@ POST {{serverUrl}}{{api}}/v1/artists
 Content-Type: {{contentType}}
 
 {
-  "name": "Michael Jackson"
+  "name": "Taylor Swift"
 }
 
 ###
 ### Patch artist by id
 ###
 
-PATCH  {{serverUrl}}{{api}}/v1/artists/66ed47e7225dfbd77e8426d8
+PATCH  {{serverUrl}}{{api}}/v1/artists/66efb14cd7f27ff013c28191
 Content-Type: {{contentType}}
 
 {
@@ -105,7 +105,7 @@ Content-Type: {{contentType}}
 ### Delete artist by id
 ###
 
-DELETE {{serverUrl}}{{api}}/v1/artists/66ec514ca18c89e6fdd3d3ed
+DELETE {{serverUrl}}{{api}}/v1/artists/66efb14cd7f27ff013c28191
 Content-Type: {{contentType}}
 
 ###
@@ -115,11 +115,11 @@ Content-Type: {{contentType}}
 # ------------------------------------------------------------
 
 ###
-### Get all songs
+### Get paginated songs
 ###
 
 
-GET {{serverUrl}}{{api}}/v1/songs
+GET {{serverUrl}}{{api}}/v1/songs?page=1&limit=10&field=title&sort=ASC
 Content-Type: {{contentType}}
 
 ###
@@ -127,7 +127,7 @@ Content-Type: {{contentType}}
 ###
 
 
-GET {{serverUrl}}{{api}}/v1/songs/66ee472fa0048ca181a5bc0b
+GET {{serverUrl}}{{api}}/v1/songs/66ee9c62cb58d7ad47cfc818
 Content-Type: {{contentType}}
 
 ###
@@ -145,9 +145,10 @@ POST {{serverUrl}}{{api}}/v1/songs
 Content-Type: {{contentType}}
 
 {
-  "title": "The 1",
-  "artists": ["66ed47e7225dfbd77e8426d8"],
-  "writers": ["66ee4d50b5fb8c9e43d5b767", "66ee4d41b5fb8c9e43d5b763", "66ee4d38b5fb8c9e43d5b75f"],
+  "title": "The 4",
+  "artists": ["66efb14cd7f27ff013c28191"],
+  "featuringArtists": [],
+  "writers": ["66efb12ed7f27ff013c2818d"],
   "year": 2024,
   "plays": [
     {
@@ -176,7 +177,7 @@ Content-Type: {{contentType}}
 ### Delete song by id
 ###
 
-DELETE {{serverUrl}}{{api}}/v1/songs/66ed052980ce8ca46d5f40f4
+DELETE {{serverUrl}}{{api}}/v1/songs/66efb172d7f27ff013c28197
 Content-Type: {{contentType}}
 
 ###
@@ -186,11 +187,11 @@ Content-Type: {{contentType}}
 # ------------------------------------------------------------
 
 ###
-### Get all writers
+### Get paginated writers
 ###
 
 
-GET {{serverUrl}}{{api}}/v1/writers
+GET {{serverUrl}}{{api}}/v1/writers?page=1&limit=10&field=title&sort=ASC
 Content-Type: {{contentType}}
 
 ###
@@ -198,7 +199,7 @@ Content-Type: {{contentType}}
 ###
 
 
-GET {{serverUrl}}{{api}}/v1/writers/66ed3a05b44bec6d3e258b28
+GET {{serverUrl}}{{api}}/v1/writers/66efd87e3a0f7b85555b5609
 Content-Type: {{contentType}}
 
 ###
@@ -227,7 +228,7 @@ Content-Type: {{contentType}}
 ### Delete writer by id
 ###
 
-DELETE {{serverUrl}}{{api}}/v1/writers/66ed47d3225dfbd77e8426cf
+DELETE {{serverUrl}}{{api}}/v1/writers/66efb12ed7f27ff013c2818d
 Content-Type: {{contentType}}
 
 ###
