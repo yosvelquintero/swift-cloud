@@ -6,22 +6,30 @@ export const DATABASE: DeepReadonly<IDatabase> = {
   mongodb: {
     collections: {
       names: {
-        albums: 'dev.albums',
-        artists: 'dev.artists',
-        songs: 'dev.songs',
-        writers: 'dev.writers',
+        albums: 'albums',
+        songs: 'songs',
+        artists: 'artists',
+        writers: 'writers',
       },
       populates: {
         albums: 'albums',
-        artists: 'artists',
         songs: 'songs',
+        artists: 'artists',
+        featuringArtists: 'featuringArtists',
         writers: 'writers',
       },
       refs: {
         album: 'Album',
-        artist: 'Artist',
         song: 'Song',
+        artist: 'Artist',
         writer: 'Writer',
+      },
+      localFields: {
+        albumIds: 'albumIds',
+        songIds: 'songIds',
+        artistIds: 'artistIds',
+        featuringArtistIds: 'featuringArtistIds',
+        writerIds: 'writerIds',
       },
     },
   },

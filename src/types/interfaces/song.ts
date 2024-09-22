@@ -9,9 +9,10 @@ export interface ISong {
   _id?: string;
   id?: string;
   title: string;
-  artists: Types.ObjectId[];
-  writers: Types.ObjectId[];
-  albums: Types.ObjectId[];
+  albumIds: Types.ObjectId[];
+  artistIds: Types.ObjectId[];
+  featuringArtistIds: Types.ObjectId[];
+  writerIds: Types.ObjectId[];
   year: number;
   plays: IPlay[];
   created: Date;
