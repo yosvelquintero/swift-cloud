@@ -46,6 +46,13 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+## Import data
+
+```bash
+# import data
+$ npm run import path/to/your/file.csv
+```
+
 ## Resources
 
 This project was built using the [NestJS](https://nestjs.com) framework. Below are some resources to help you get started with NestJS:
