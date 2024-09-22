@@ -1,9 +1,10 @@
 import { Type } from 'class-transformer';
 import { IsEnum, IsNumber, IsOptional, IsString, Min } from 'class-validator';
 
+import { PAGINATION } from '@app/config';
 import { ESortOrder } from '@app/types';
 
-export class QueryBaseDto {
+export class QueryPaginationDto {
   @IsOptional()
   @Type(() => Number)
   @IsNumber()
@@ -14,18 +15,13 @@ export class QueryBaseDto {
   @Type(() => Number)
   @IsNumber()
   @Min(1)
-  readonly limit?: number = 10;
+  readonly limit?: number = PAGINATION.limit;
 
   @IsOptional()
   @IsEnum(ESortOrder)
   readonly sort?: ESortOrder = ESortOrder.DESC;
 
-  // Example filter parameters
   @IsOptional()
   @IsString()
-  readonly name?: string;
-
-  @IsOptional()
-  @IsString()
-  readonly genre?: string;
+  readonly field?: string = PAGINATION.field;
 }

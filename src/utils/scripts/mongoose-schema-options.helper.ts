@@ -11,5 +11,11 @@ export function getMongooseSchemaOptions(
       createdAt: 'created',
       updatedAt: 'updated',
     },
+    toJSON: {
+      virtuals: true,
+    },
+    toObject: {
+      virtuals: true,
+    },
   };
 }
