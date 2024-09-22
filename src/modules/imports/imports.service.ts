@@ -151,8 +151,6 @@ export class ImportService {
         `Error processing record: ${error.message}`,
         error.stack,
       );
-      // Optionally rethrow to be handled by subscriber
-      // throw error;
     }
   }
 
@@ -318,8 +316,6 @@ export class ImportService {
         `Error finding or creating ${entityName} "${name}": ${error.message}`,
         error.stack,
       );
-      // Optionally rethrow to be handled by subscriber
-      // throw error;
     }
   }
 
@@ -389,8 +385,6 @@ export class ImportService {
         `Error finding or creating album "${title}": ${error.message}`,
         error.stack,
       );
-      // Optionally rethrow to be handled by subscriber
-      // throw error;
     }
   }
 
@@ -441,8 +435,6 @@ export class ImportService {
         `Error finding or creating song "${songTitle}": ${error.message}`,
         error.stack,
       );
-      // Optionally rethrow to be handled by subscriber
-      // throw error;
     }
   }
 
