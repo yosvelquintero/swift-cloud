@@ -1,3 +1,3 @@
-import { QueryBaseDto } from '@app/utils';
+import { QueryPaginationDto } from '@app/utils';
 
-export class QueryWriterDto extends QueryBaseDto {}
+export class QueryWriterDto extends QueryPaginationDto {}

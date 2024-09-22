@@ -17,12 +17,24 @@ export class ArtistsService {
     return this.artistsRepository.find({});
   }
 
-  findPaginated(page: number, limit: number, sort: ESortOrder) {
-    return this.artistsRepository.findPaginated({}, {}, {}, page, limit, sort);
+  findPaginated(page: number, limit: number, sort: ESortOrder, field: string) {
+    return this.artistsRepository.findPaginated(
+      {},
+      {},
+      {},
+      page,
+      limit,
+      sort,
+      field,
+    );
   }
 
   findOne(id: string) {
     return this.artistsRepository.findOne({ _id: id });
+  }
+
+  async findOneByName(name: string) {
+    return this.artistsRepository.findOne({ name });
   }
 
   update(id: string, updateArtistDto: UpdateArtistDto) {

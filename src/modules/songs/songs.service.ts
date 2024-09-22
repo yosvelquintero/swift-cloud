@@ -10,6 +10,7 @@ import { SongsRepository } from './songs.repository';
 export class SongsService {
   private populateFields = [
     DATABASE.mongodb.collections.populates.artists,
+    DATABASE.mongodb.collections.populates.featuringArtists,
     DATABASE.mongodb.collections.populates.writers,
     DATABASE.mongodb.collections.populates.albums,
   ];
@@ -24,15 +25,15 @@ export class SongsService {
     return this.songsRepository.find({}, {}, { populate: this.populateFields });
   }
 
-  findPaginated(page: number, limit: number, sort: ESortOrder) {
-    return this.songsRepository.findPaginated({}, {}, {}, page, limit, sort);
-  }
-
-  async findOne(id: string) {
-    return this.songsRepository.findOne(
-      { _id: id },
+  findPaginated(page: number, limit: number, sort: ESortOrder, field: string) {
+    return this.songsRepository.findPaginated(
       {},
-      { populate: this.populateFields },
+      {},
+      {},
+      page,
+      limit,
+      sort,
+      field,
     );
   }
 
@@ -51,6 +52,26 @@ export class SongsService {
   async findMostPopularSongs(monthStr: string, limit?: number) {
     const month = new Date(monthStr);
     return this.songsRepository.findMostPopularSongs(month, limit);
+  }
+
+  async findOne(id: string) {
+    return this.songsRepository.findOne(
+      { _id: id },
+      {},
+      { populate: this.populateFields },
+    );
+  }
+
+  async findOneByTitleArtistsAndYear(
+    title: string,
+    artistIds: string[],
+    year: number,
+  ) {
+    return this.songsRepository.findOne(
+      { title, artists: artistIds, year },
+      {},
+      { populate: this.populateFields },
+    );
   }
 
   async update(id: string, updateSongDto: UpdateSongDto) {

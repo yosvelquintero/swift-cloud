@@ -36,32 +36,12 @@ export class Song implements ISong {
   title: string;
 
   @Prop({
-    type: [Types.ObjectId],
-    ref: DATABASE.mongodb.collections.refs.artist,
-    default: [],
-  })
-  @ApiProperty({
-    type: () => [Artist],
-    description: 'Array of artists',
-    default: [],
-  })
-  artists: Types.ObjectId[];
-
-  @Prop({
-    type: [Types.ObjectId],
-    ref: DATABASE.mongodb.collections.refs.writer,
-    default: [],
-  })
-  @ApiProperty({
-    type: () => [Writer],
-    description: 'Array of writers',
-    default: [],
-  })
-  writers: Types.ObjectId[];
-
-  @Prop({
-    type: [Types.ObjectId],
-    ref: DATABASE.mongodb.collections.refs.album,
+    type: [
+      {
+        type: Types.ObjectId,
+        ref: DATABASE.mongodb.collections.refs.album,
+      },
+    ],
     default: [],
   })
   @ApiProperty({
@@ -69,7 +49,55 @@ export class Song implements ISong {
     description: 'Array of albums',
     default: [],
   })
-  albums: Types.ObjectId[];
+  albumIds: Types.ObjectId[];
+
+  @Prop({
+    type: [
+      {
+        type: Types.ObjectId,
+        ref: DATABASE.mongodb.collections.refs.artist,
+      },
+    ],
+    default: [],
+  })
+  @ApiProperty({
+    type: () => [Artist],
+    description: 'Array of artists',
+    default: [],
+  })
+  artistIds: Types.ObjectId[];
+
+  @Prop({
+    type: [
+      {
+        type: Types.ObjectId,
+        ref: DATABASE.mongodb.collections.refs.artist,
+      },
+    ],
+    default: [],
+  })
+  @ApiProperty({
+    type: () => [Artist],
+    description: 'Array of featuring artists',
+    default: [],
+  })
+  featuringArtistIds: Types.ObjectId[];
+
+  @Prop({
+    type: [
+      {
+        type: Types.ObjectId,
+        ref: DATABASE.mongodb.collections.refs.writer,
+      },
+    ],
+    default: [],
+  })
+  @ApiProperty({
+    type: () => [Writer],
+    description: 'Array of writers',
+    default: [],
+  })
+  writerIds: Types.ObjectId[];
 
   @Prop()
   @ApiProperty()
@@ -101,16 +129,16 @@ export const SongSchema = SchemaFactory.createForClass(Song);
 SongSchema.index({ year: 1 });
 
 // Add index on the 'artists' field
-SongSchema.index({ albums: 1 });
+SongSchema.index({ albumIds: 1 });
 
 // Add index on the 'plays.month' field
 SongSchema.index({ 'plays.month': 1 });
 
-// Compound index on the 'title', 'artists', and 'year' fields
+// Compound index on the 'title' and 'year' fields
 SongSchema.index(
   {
     title: 1,
-    artists: 1,
+    artistIds: 1,
     year: 1,
   },
   { unique: true },
@@ -118,3 +146,31 @@ SongSchema.index(
 
 // Add unique validation
 SongSchema.plugin(uniqueValidator);
+
+// Configure virtuals
+SongSchema.virtual(DATABASE.mongodb.collections.populates.albums, {
+  ref: DATABASE.mongodb.collections.refs.album,
+  localField: DATABASE.mongodb.collections.localFields.albumIds,
+  foreignField: '_id',
+});
+
+SongSchema.virtual(DATABASE.mongodb.collections.populates.artists, {
+  ref: DATABASE.mongodb.collections.refs.artist,
+  localField: DATABASE.mongodb.collections.localFields.artistIds,
+  foreignField: '_id',
+});
+
+SongSchema.virtual(DATABASE.mongodb.collections.populates.featuringArtists, {
+  ref: DATABASE.mongodb.collections.refs.artist,
+  localField: DATABASE.mongodb.collections.localFields.featuringArtistIds,
+  foreignField: '_id',
+});
+
+SongSchema.virtual(DATABASE.mongodb.collections.populates.writers, {
+  ref: DATABASE.mongodb.collections.refs.writer,
+  localField: DATABASE.mongodb.collections.localFields.writerIds,
+  foreignField: '_id',
+});
+
+SongSchema.set('toObject', { virtuals: true });
+SongSchema.set('toJSON', { virtuals: true });

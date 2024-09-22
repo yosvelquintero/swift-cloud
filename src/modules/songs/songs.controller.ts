@@ -16,7 +16,6 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 
-import { PAGINATION } from '@app/config';
 import { ESortOrder, IPaginationResponse } from '@app/types';
 
 import {
@@ -56,6 +55,12 @@ export class SongsController {
     required: false,
   })
   @ApiQuery({
+    name: 'field',
+    description: 'Field to sort by',
+    type: String,
+    required: false,
+  })
+  @ApiQuery({
     name: 'limit',
     description: 'Number of items per page',
     type: Number,
@@ -71,13 +76,8 @@ export class SongsController {
   findPaginated(
     @Query() queryData: QuerySongDto,
   ): Promise<IPaginationResponse<SongDocument>> {
-    const {
-      page = 1,
-      limit = PAGINATION.limit,
-      sort = ESortOrder.DESC,
-    } = queryData;
-
-    return this.songsService.findPaginated(page, limit, sort);
+    const { page, limit, sort, field } = queryData;
+    return this.songsService.findPaginated(page, limit, sort, field);
   }
 
   @Get(':id')

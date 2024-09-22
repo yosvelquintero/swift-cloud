@@ -12,5 +12,6 @@ import { WritersService } from './writers.service';
   ],
   controllers: [WritersController],
   providers: [WritersService, WritersRepository],
+  exports: [WritersService],
 })
 export class WritersModule {}

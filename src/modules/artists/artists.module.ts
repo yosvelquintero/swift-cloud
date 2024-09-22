@@ -12,5 +12,6 @@ import { Artist, ArtistSchema } from './entities/artist.entity';
   ],
   controllers: [ArtistsController],
   providers: [ArtistsService, ArtistsRepository],
+  exports: [ArtistsService],
 })
 export class ArtistsModule {}

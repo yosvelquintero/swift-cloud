@@ -4,6 +4,7 @@ import {
   IsArray,
   IsDate,
   IsInt,
+  IsMongoId,
   IsNotEmpty,
   IsOptional,
   IsString,
@@ -40,33 +41,45 @@ export class CreateSongDto {
   title: string;
 
   @ApiProperty({
+    description: 'Array of album IDs',
+    type: [String],
+    example: ['60d21b4667d0d8992e610c88'],
+    required: false,
+  })
+  @IsArray()
+  @IsOptional()
+  @IsMongoId({ each: true })
+  albumIds: string[];
+
+  @ApiProperty({
     description: 'Array of artist IDs',
     type: [String],
     example: ['60d21b4667d0d8992e610c85'],
   })
   @IsArray()
   @IsOptional()
-  artists: string[];
+  @IsMongoId({ each: true })
+  artistIds: string[];
+
+  @ApiProperty({
+    description: 'Array of featuring artist IDs',
+    type: [String],
+    example: ['60d21b4667d0d8992e610c86'],
+  })
+  @IsArray()
+  @IsOptional()
+  featuringArtistIds: string[];
 
   @ApiProperty({
     description: 'Array of writer IDs',
     type: [String],
-    example: ['60d21b4667d0d8992e610c86'],
+    example: ['60d21b4667d0d8992e610c87'],
     required: false,
   })
   @IsArray()
   @IsOptional()
-  writers: string[];
-
-  @ApiProperty({
-    description: 'Array of album IDs',
-    type: [String],
-    example: ['60d21b4667d0d8992e610c86'],
-    required: false,
-  })
-  @IsArray()
-  @IsOptional()
-  albums: string[];
+  @IsMongoId({ each: true })
+  writerIds: string[];
 
   @ApiProperty({
     description: 'Release year',

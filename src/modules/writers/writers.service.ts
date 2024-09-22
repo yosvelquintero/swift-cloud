@@ -17,12 +17,24 @@ export class WritersService {
     return this.writersRepository.find({});
   }
 
-  findPaginated(page: number, limit: number, sort: ESortOrder) {
-    return this.writersRepository.findPaginated({}, {}, {}, page, limit, sort);
+  findPaginated(page: number, limit: number, sort: ESortOrder, field: string) {
+    return this.writersRepository.findPaginated(
+      {},
+      {},
+      {},
+      page,
+      limit,
+      sort,
+      field,
+    );
   }
 
   findOne(id: string) {
     return this.writersRepository.findOne({ _id: id });
+  }
+
+  async findOneByName(name: string) {
+    return this.writersRepository.findOne({ name });
   }
 
   update(id: string, updateWriterDto: UpdateWriterDto) {

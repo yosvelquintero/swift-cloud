@@ -2,6 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
   IsArray,
   IsInt,
+  IsMongoId,
   IsOptional,
   IsString,
   Max,
@@ -23,7 +24,8 @@ export class CreateAlbumDto {
   })
   @IsArray()
   @IsOptional()
-  artists?: string[];
+  @IsMongoId({ each: true })
+  artistIds?: string[];
 
   @ApiProperty({
     description: 'Array of song IDs',
@@ -32,7 +34,8 @@ export class CreateAlbumDto {
   })
   @IsArray()
   @IsOptional()
-  songs?: string[];
+  @IsMongoId({ each: true })
+  songIds?: string[];
 
   @ApiProperty({
     description: 'Release year',

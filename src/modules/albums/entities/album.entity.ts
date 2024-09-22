@@ -23,8 +23,12 @@ export class Album implements IAlbum {
   title: string;
 
   @Prop({
-    type: [Types.ObjectId],
-    ref: DATABASE.mongodb.collections.refs.artist,
+    type: [
+      {
+        type: Types.ObjectId,
+        ref: DATABASE.mongodb.collections.refs.artist,
+      },
+    ],
     default: [],
   })
   @ApiProperty({
@@ -32,11 +36,15 @@ export class Album implements IAlbum {
     description: 'Array of artists',
     default: [],
   })
-  artists: Types.ObjectId[];
+  artistIds: Types.ObjectId[];
 
   @Prop({
-    type: [Types.ObjectId],
-    ref: DATABASE.mongodb.collections.refs.song,
+    type: [
+      {
+        type: Types.ObjectId,
+        ref: DATABASE.mongodb.collections.refs.song,
+      },
+    ],
     default: [],
   })
   @ApiProperty({
@@ -44,7 +52,7 @@ export class Album implements IAlbum {
     description: 'Array of songs',
     default: [],
   })
-  songs: Types.ObjectId[];
+  songIds: Types.ObjectId[];
 
   @Prop()
   @ApiProperty()
@@ -64,14 +72,17 @@ export const AlbumSchema = SchemaFactory.createForClass(Album);
 // Add index on the 'title' field
 AlbumSchema.index({ title: 1 });
 
+// Add index on the 'artistIds' field
+AlbumSchema.index({ artistId: 1 });
+
 // Add index on the 'year' field
 AlbumSchema.index({ year: 1 });
 
-// Compound index on the 'title', 'artists', and 'year' fields
+// Compound index on the 'title', 'artistIds' and 'year' fields
 AlbumSchema.index(
   {
     title: 1,
-    artists: 1,
+    artistIds: 1,
     year: 1,
   },
   { unique: true },
@@ -79,3 +90,19 @@ AlbumSchema.index(
 
 // Add unique validation
 AlbumSchema.plugin(uniqueValidator);
+
+// Configure virtuals
+AlbumSchema.virtual(DATABASE.mongodb.collections.populates.artists, {
+  ref: DATABASE.mongodb.collections.refs.artist,
+  localField: DATABASE.mongodb.collections.localFields.artistIds,
+  foreignField: '_id',
+});
+
+AlbumSchema.virtual(DATABASE.mongodb.collections.populates.songs, {
+  ref: DATABASE.mongodb.collections.refs.song,
+  localField: DATABASE.mongodb.collections.localFields.songIds,
+  foreignField: '_id',
+});
+
+AlbumSchema.set('toObject', { virtuals: true });
+AlbumSchema.set('toJSON', { virtuals: true });

@@ -12,5 +12,6 @@ import { Album, AlbumSchema } from './entities/album.entity';
   ],
   controllers: [AlbumsController],
   providers: [AlbumsService, AlbumsRepository],
+  exports: [AlbumsService],
 })
 export class AlbumsModule {}

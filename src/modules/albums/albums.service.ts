@@ -27,13 +27,33 @@ export class AlbumsService {
     );
   }
 
-  findPaginated(page: number, limit: number, sort: ESortOrder) {
-    return this.albumsRepository.findPaginated({}, {}, {}, page, limit, sort);
+  findPaginated(page: number, limit: number, sort: ESortOrder, field: string) {
+    return this.albumsRepository.findPaginated(
+      {},
+      {},
+      {},
+      page,
+      limit,
+      sort,
+      field,
+    );
   }
 
   findOne(id: string) {
     return this.albumsRepository.findOne(
       { _id: id },
+      {},
+      { populate: this.populateFields },
+    );
+  }
+
+  async findOneByTitleArtistsAndYear(
+    title: string,
+    artistIds: string[],
+    year: number,
+  ) {
+    return this.albumsRepository.findOne(
+      { title, artistIds, year },
       {},
       { populate: this.populateFields },
     );
