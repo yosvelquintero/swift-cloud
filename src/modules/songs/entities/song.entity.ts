@@ -141,7 +141,9 @@ SongSchema.index(
     artistIds: 1,
     year: 1,
   },
-  { unique: true },
+  {
+    unique: true,
+  },
 );
 
 // Add unique validation

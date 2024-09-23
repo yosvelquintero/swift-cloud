@@ -34,7 +34,14 @@ export class Writer implements IWriter {
 export const WriterSchema = SchemaFactory.createForClass(Writer);
 
 // Add index on the 'name' field
-WriterSchema.index({ name: 1 });
+WriterSchema.index(
+  {
+    name: 1,
+  },
+  {
+    unique: true,
+  },
+);
 
 // Add unique validation
 WriterSchema.plugin(uniqueValidator);

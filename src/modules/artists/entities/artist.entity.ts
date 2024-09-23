@@ -34,7 +34,14 @@ export class Artist implements IArtist {
 export const ArtistSchema = SchemaFactory.createForClass(Artist);
 
 // Add index on the 'name' field
-ArtistSchema.index({ name: 1 });
+ArtistSchema.index(
+  {
+    name: 1,
+  },
+  {
+    unique: true,
+  },
+);
 
 // Add unique validation
 ArtistSchema.plugin(uniqueValidator);
