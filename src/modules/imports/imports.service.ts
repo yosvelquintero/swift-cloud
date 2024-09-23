@@ -12,7 +12,7 @@ import { finalize, mergeMap } from 'rxjs/operators';
 
 import { AlbumsService } from '@app/modules/albums/albums.service';
 import { CreateAlbumDto } from '@app/modules/albums/dto';
-import { AlbumDocument } from '@app/modules/albums/entities/album.entity';
+import { TAlbumDocument } from '@app/modules/albums/entities/album.entity';
 import { ArtistsService } from '@app/modules/artists/artists.service';
 import { CreateSongDto } from '@app/modules/songs/dto/create-song.dto';
 import { SongsService } from '@app/modules/songs/songs.service';
@@ -21,7 +21,7 @@ import { IPlay } from '@app/types';
 import { EAlbumType } from '@app/types/enums/album';
 import { ICsvRecord } from '@app/types/interfaces/csv';
 
-interface ParsedRecord {
+interface IParsedRecord {
   songTitle: string;
   artistField: string;
   writerField: string;
@@ -29,16 +29,16 @@ interface ParsedRecord {
   year: number;
 }
 
-interface ResolvedEntities {
+interface IResolvedEntities {
   mainArtistIds: string[];
   featuringArtistIds: string[];
   writerIds: string[];
-  album: AlbumDocument;
+  album: TAlbumDocument;
 }
 
 interface ILogRecord {
   albumTitle: string;
-  album: AlbumDocument;
+  album: TAlbumDocument;
   songTitle: string;
   mainArtistIds: string[];
   featuringArtistIds: string[];
@@ -75,7 +75,7 @@ export class ImportService {
 
   private artistCache = new Map<string, string>();
   private writerCache = new Map<string, string>();
-  private albumCache = new Map<string, AlbumDocument>();
+  private albumCache = new Map<string, TAlbumDocument>();
 
   constructor(
     private readonly albumsService: AlbumsService,
@@ -126,8 +126,8 @@ export class ImportService {
       const plays = this.extractPlays(record);
 
       const songId = await this.findOrCreateSong({
-        songTitle: parsedRecord.songTitle,
-        mainArtistIds: resolvedEntities.mainArtistIds,
+        title: parsedRecord.songTitle,
+        artistIds: resolvedEntities.mainArtistIds,
         featuringArtistIds: resolvedEntities.featuringArtistIds,
         writerIds: resolvedEntities.writerIds,
         album: resolvedEntities.album,
@@ -154,7 +154,7 @@ export class ImportService {
     }
   }
 
-  private parseRecord(record: ICsvRecord): ParsedRecord {
+  private parseRecord(record: ICsvRecord): IParsedRecord {
     const {
       Song: songTitle,
       Artist: artistField,
@@ -178,8 +178,8 @@ export class ImportService {
   }
 
   private async resolveEntities(
-    parsedRecord: ParsedRecord,
-  ): Promise<ResolvedEntities> {
+    parsedRecord: IParsedRecord,
+  ): Promise<IResolvedEntities> {
     const { artistField, writerField, albumTitle, year } = parsedRecord;
 
     const { mainArtists, featuringArtists } = this.parseArtists(artistField);
@@ -236,9 +236,8 @@ export class ImportService {
     // Split on commas, ' and ', '&', and multiple spaces
     return names
       .split(/,| and | & |&/i)
-      .map((name) => name.trim())
-      .map((name) => this.normalizeName(name))
-      .filter((name) => name.length > 0);
+      .map((str) => this.normalizeStrings(str).trim())
+      .filter((str) => str.length > 0);
   }
 
   private async resolveArtists(artistNames: string[]): Promise<string[]> {
@@ -253,8 +252,7 @@ export class ImportService {
   private async resolveWriters(writerField: string): Promise<string[]> {
     const writerNames = writerField
       .split(/[\r?\n,]+/)
-      .map((name) => name.trim())
-      .map((name) => this.normalizeName(name))
+      .map((str) => this.normalizeStrings(str).trim())
       .filter(Boolean);
 
     const writerIds: string[] = [];
@@ -269,10 +267,10 @@ export class ImportService {
     title: string,
     artistIds: string[],
     year: number,
-  ): Promise<AlbumDocument> {
+  ): Promise<TAlbumDocument> {
     const albumTitle = title
       .split(/\r?\n/)
-      .map((part) => part.trim())
+      .map((str) => this.normalizeStrings(str).trim())
       .join(this.albumTitleSeparator);
     const normalizedTitle = this.normalizeAlbumTitle(albumTitle);
     return this.findOrCreateAlbum(normalizedTitle, year, artistIds);
@@ -283,7 +281,7 @@ export class ImportService {
     return this.albumTitleMap[lowerTitle] || title;
   }
 
-  private normalizeName(name: string): string {
+  private normalizeStrings(name: string): string {
     return name.replace(/\[\w\]/g, '').trim();
   }
 
@@ -351,7 +349,7 @@ export class ImportService {
     title: string,
     year: number,
     artistIds: string[],
-  ): Promise<AlbumDocument> {
+  ): Promise<TAlbumDocument> {
     if (this.albumCache.has(title)) {
       return this.albumCache.get(title);
     }
@@ -389,17 +387,17 @@ export class ImportService {
   }
 
   private async findOrCreateSong(data: {
-    songTitle: string;
-    mainArtistIds: string[];
+    title: string;
+    artistIds: string[];
     featuringArtistIds: string[];
     writerIds: string[];
-    album: AlbumDocument;
+    album: TAlbumDocument;
     year: number;
     plays: IPlay[];
   }): Promise<string> {
     const {
-      songTitle,
-      mainArtistIds: artistIds,
+      title,
+      artistIds,
       featuringArtistIds,
       writerIds,
       album,
@@ -408,19 +406,19 @@ export class ImportService {
     } = data;
     try {
       const existingSong = await this.songsService.findOneByTitleArtistsAndYear(
-        songTitle,
+        title,
         artistIds,
         year,
       );
       this.logger.debug(
-        `Found existing song: "${songTitle}" [ID: ${existingSong.id}]`,
+        `Found existing song: "${title}" [ID: ${existingSong.id}]`,
       );
       return existingSong.id;
     } catch (error) {
       if (error instanceof NotFoundException) {
-        this.logger.debug(`Song not found. Creating new song: "${songTitle}"`);
+        this.logger.debug(`Song not found. Creating new song: "${title}"`);
         const createSongDto: CreateSongDto = {
-          title: songTitle,
+          title,
           albumIds: album.id ? [album.id] : [],
           artistIds,
           featuringArtistIds,
@@ -432,7 +430,7 @@ export class ImportService {
         return newSong.id;
       }
       this.logger.error(
-        `Error finding or creating song "${songTitle}": ${error.message}`,
+        `Error finding or creating song "${title}": ${error.message}`,
         error.stack,
       );
     }
@@ -466,7 +464,7 @@ export class ImportService {
   }
 
   private async addSongToAlbum(
-    album: AlbumDocument,
+    album: TAlbumDocument,
     songId: string,
   ): Promise<void> {
     if (!Types.ObjectId.isValid(songId)) {

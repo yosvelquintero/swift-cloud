@@ -4,11 +4,11 @@ import { Model } from 'mongoose';
 
 import { EntityRepository } from '@app/entity.repository';
 
-import { Writer, WriterDocument } from './entities/writer.entity';
+import { TWriterDocument, Writer } from './entities/writer.entity';
 
 @Injectable()
-export class WritersRepository extends EntityRepository<WriterDocument> {
-  constructor(@InjectModel(Writer.name) writerModel: Model<WriterDocument>) {
+export class WritersRepository extends EntityRepository<TWriterDocument> {
+  constructor(@InjectModel(Writer.name) writerModel: Model<TWriterDocument>) {
     super(writerModel);
   }
 }

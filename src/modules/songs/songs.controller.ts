@@ -24,7 +24,7 @@ import {
   QuerySongDto,
   UpdateSongDto,
 } from './dto';
-import { Song, SongDocument } from './entities/song.entity';
+import { Song, TSongDocument } from './entities/song.entity';
 import { SongsService } from './songs.service';
 
 @ApiTags('Songs')
@@ -42,7 +42,7 @@ export class SongsController {
     description: 'The song has been successfully created.',
     type: Song,
   })
-  create(@Body() createSongDto: CreateSongDto): Promise<SongDocument> {
+  create(@Body() createSongDto: CreateSongDto): Promise<TSongDocument> {
     return this.songsService.create(createSongDto);
   }
 
@@ -75,7 +75,7 @@ export class SongsController {
   @ApiResponse({ status: 200, description: 'List of songs.', type: [Song] })
   findPaginated(
     @Query() queryData: QuerySongDto,
-  ): Promise<IPaginationResponse<SongDocument>> {
+  ): Promise<IPaginationResponse<TSongDocument>> {
     const { page, limit, sort, field } = queryData;
     return this.songsService.findPaginated(page, limit, sort, field);
   }
@@ -85,7 +85,7 @@ export class SongsController {
   @ApiParam({ name: 'id', description: 'ID of the song', type: String })
   @ApiResponse({ status: 200, description: 'The song data.', type: Song })
   @ApiResponse({ status: 404, description: 'Song not found.' })
-  findOne(@Param() paramData: ParamSongDto): Promise<SongDocument> {
+  findOne(@Param() paramData: ParamSongDto): Promise<TSongDocument> {
     return this.songsService.findOne(paramData.id);
   }
 
@@ -97,7 +97,7 @@ export class SongsController {
     description: 'List of songs released in the given year.',
     type: [Song],
   })
-  findByYear(@Param('year') year: number): Promise<SongDocument[]> {
+  findByYear(@Param('year') year: number): Promise<TSongDocument[]> {
     return this.songsService.findByYear(year);
   }
 
@@ -109,7 +109,7 @@ export class SongsController {
     description: 'List of songs from the specified album.',
     type: [Song],
   })
-  findByAlbum(@Param() paramData: ParamSongDto): Promise<SongDocument[]> {
+  findByAlbum(@Param() paramData: ParamSongDto): Promise<TSongDocument[]> {
     return this.songsService.findByAlbum(paramData.id);
   }
 
@@ -133,7 +133,7 @@ export class SongsController {
   findMostPopularSongs(
     @Query('month') month: string,
     @Query('limit') limit?: number,
-  ): Promise<SongDocument[]> {
+  ): Promise<TSongDocument[]> {
     return this.songsService.findMostPopularSongs(month, limit);
   }
 
@@ -162,7 +162,7 @@ export class SongsController {
     type: Song,
   })
   @ApiResponse({ status: 404, description: 'Song not found.' })
-  remove(@Param() paramData: ParamSongDto): Promise<SongDocument> {
+  remove(@Param() paramData: ParamSongDto): Promise<TSongDocument> {
     return this.songsService.remove(paramData.id);
   }
 }

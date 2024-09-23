@@ -25,7 +25,7 @@ import {
   QueryAlbumDto,
   UpdateAlbumDto,
 } from './dto';
-import { Album, AlbumDocument } from './entities/album.entity';
+import { Album, TAlbumDocument } from './entities/album.entity';
 
 @ApiTags('Albums')
 @Controller({
@@ -42,7 +42,7 @@ export class AlbumsController {
     description: 'The album has been successfully created.',
     type: Album,
   })
-  create(@Body() createAlbumDto: CreateAlbumDto): Promise<AlbumDocument> {
+  create(@Body() createAlbumDto: CreateAlbumDto): Promise<TAlbumDocument> {
     return this.albumsService.create(createAlbumDto);
   }
 
@@ -75,7 +75,7 @@ export class AlbumsController {
   @ApiResponse({ status: 200, description: 'List of albums.', type: [Album] })
   findPaginated(
     @Query() queryData: QueryAlbumDto,
-  ): Promise<IPaginationResponse<AlbumDocument>> {
+  ): Promise<IPaginationResponse<TAlbumDocument>> {
     const { page, limit, sort, field } = queryData;
     return this.albumsService.findPaginated(page, limit, sort, field);
   }
@@ -85,7 +85,7 @@ export class AlbumsController {
   @ApiParam({ name: 'id', description: 'ID of the album', type: String })
   @ApiResponse({ status: 200, description: 'The album data.', type: Album })
   @ApiResponse({ status: 404, description: 'Album not found.' })
-  findOne(@Param() paramData: ParamAlbumDto): Promise<AlbumDocument> {
+  findOne(@Param() paramData: ParamAlbumDto): Promise<TAlbumDocument> {
     return this.albumsService.findOne(paramData.id);
   }
 
@@ -100,7 +100,7 @@ export class AlbumsController {
   update(
     @Param() paramData: ParamAlbumDto,
     @Body() updateAlbumDto: UpdateAlbumDto,
-  ): Promise<AlbumDocument> {
+  ): Promise<TAlbumDocument> {
     return this.albumsService.update(paramData.id, updateAlbumDto);
   }
 
@@ -112,7 +112,7 @@ export class AlbumsController {
     description: 'The album has been successfully deleted.',
     type: Album,
   })
-  remove(@Param() paramData: ParamAlbumDto): Promise<AlbumDocument> {
+  remove(@Param() paramData: ParamAlbumDto): Promise<TAlbumDocument> {
     return this.albumsService.remove(paramData.id);
   }
 }

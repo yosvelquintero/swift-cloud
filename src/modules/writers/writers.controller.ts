@@ -24,7 +24,7 @@ import {
   QueryWriterDto,
   UpdateWriterDto,
 } from './dto';
-import { Writer, WriterDocument } from './entities/writer.entity';
+import { TWriterDocument, Writer } from './entities/writer.entity';
 import { WritersService } from './writers.service';
 
 @ApiTags('Writers')
@@ -42,7 +42,7 @@ export class WritersController {
     description: 'The writer has been successfully created.',
     type: Writer,
   })
-  create(@Body() createWriterDto: CreateWriterDto): Promise<WriterDocument> {
+  create(@Body() createWriterDto: CreateWriterDto): Promise<TWriterDocument> {
     return this.writersService.create(createWriterDto);
   }
 
@@ -75,7 +75,7 @@ export class WritersController {
   @ApiResponse({ status: 200, description: 'List of writers.', type: [Writer] })
   findPaginated(
     @Query() queryData: QueryWriterDto,
-  ): Promise<IPaginationResponse<WriterDocument>> {
+  ): Promise<IPaginationResponse<TWriterDocument>> {
     const { page, limit, sort, field } = queryData;
     return this.writersService.findPaginated(page, limit, sort, field);
   }
@@ -85,7 +85,7 @@ export class WritersController {
   @ApiParam({ name: 'id', description: 'ID of the writer', type: String })
   @ApiResponse({ status: 200, description: 'The writer data.', type: Writer })
   @ApiResponse({ status: 404, description: 'Not Found.' })
-  findOne(@Param() paramData: ParamWriterDto): Promise<WriterDocument> {
+  findOne(@Param() paramData: ParamWriterDto): Promise<TWriterDocument> {
     return this.writersService.findOne(paramData.id);
   }
 
@@ -101,7 +101,7 @@ export class WritersController {
   update(
     @Param() paramData: ParamWriterDto,
     @Body() updateWriterDto: UpdateWriterDto,
-  ): Promise<WriterDocument> {
+  ): Promise<TWriterDocument> {
     return this.writersService.update(paramData.id, updateWriterDto);
   }
 
@@ -114,7 +114,7 @@ export class WritersController {
     type: Writer,
   })
   @ApiResponse({ status: 404, description: 'Not Found.' })
-  remove(@Param() paramData: ParamWriterDto): Promise<WriterDocument> {
+  remove(@Param() paramData: ParamWriterDto): Promise<TWriterDocument> {
     return this.writersService.remove(paramData.id);
   }
 }

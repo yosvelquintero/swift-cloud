@@ -10,7 +10,7 @@ import { Writer } from '@app/modules/writers/entities/writer.entity';
 import { ISong } from '@app/types';
 import { getMongooseSchemaOptions } from '@app/utils';
 
-export type SongDocument = Song & Document;
+export type TSongDocument = Song & Document;
 
 @Schema()
 export class Play {

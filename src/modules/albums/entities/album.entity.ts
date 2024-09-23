@@ -9,7 +9,7 @@ import { Song } from '@app/modules/songs/entities/song.entity';
 import { IAlbum } from '@app/types';
 import { getMongooseSchemaOptions } from '@app/utils';
 
-export type AlbumDocument = Album & Document;
+export type TAlbumDocument = Album & Document;
 
 @Schema(
   getMongooseSchemaOptions({

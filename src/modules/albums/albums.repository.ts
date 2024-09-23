@@ -4,11 +4,11 @@ import { Model } from 'mongoose';
 
 import { EntityRepository } from '@app/entity.repository';
 
-import { Album, AlbumDocument } from './entities/album.entity';
+import { Album, TAlbumDocument } from './entities/album.entity';
 
 @Injectable()
-export class AlbumsRepository extends EntityRepository<AlbumDocument> {
-  constructor(@InjectModel(Album.name) albumModel: Model<AlbumDocument>) {
+export class AlbumsRepository extends EntityRepository<TAlbumDocument> {
+  constructor(@InjectModel(Album.name) albumModel: Model<TAlbumDocument>) {
     super(albumModel);
   }
 }

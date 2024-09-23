@@ -7,7 +7,7 @@ import { DATABASE } from '@app/config';
 import { IWriter } from '@app/types';
 import { getMongooseSchemaOptions } from '@app/utils';
 
-export type WriterDocument = Writer & Document;
+export type TWriterDocument = Writer & Document;
 
 @Schema(
   getMongooseSchemaOptions({

@@ -7,7 +7,7 @@ import { DATABASE } from '@app/config';
 import { IArtist } from '@app/types';
 import { getMongooseSchemaOptions } from '@app/utils';
 
-export type ArtistDocument = Artist & Document;
+export type TArtistDocument = Artist & Document;
 
 @Schema(
   getMongooseSchemaOptions({

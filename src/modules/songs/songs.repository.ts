@@ -4,32 +4,32 @@ import { Model } from 'mongoose';
 
 import { EntityRepository } from '@app/entity.repository';
 
-import { Song, SongDocument } from './entities/song.entity';
+import { Song, TSongDocument } from './entities/song.entity';
 
 @Injectable()
-export class SongsRepository extends EntityRepository<SongDocument> {
-  constructor(@InjectModel(Song.name) songModel: Model<SongDocument>) {
+export class SongsRepository extends EntityRepository<TSongDocument> {
+  constructor(@InjectModel(Song.name) songModel: Model<TSongDocument>) {
     super(songModel);
   }
 
   async findAll(
     year: number,
     options?: { populate?: string[] },
-  ): Promise<SongDocument[]> {
+  ): Promise<TSongDocument[]> {
     return this.entityModel.find({ year }, {}, options);
   }
 
   async findByYear(
     year: number,
     options?: { populate?: string[] },
-  ): Promise<SongDocument[]> {
+  ): Promise<TSongDocument[]> {
     return this.entityModel.find({ year }, {}, options);
   }
 
   async findByAlbum(
     albumId: string,
     options?: { populate?: string[] },
-  ): Promise<SongDocument[]> {
+  ): Promise<TSongDocument[]> {
     return this.entityModel.find({ albums: albumId }, {}, options);
   }
 

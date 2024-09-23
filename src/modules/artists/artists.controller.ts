@@ -25,7 +25,7 @@ import {
   QueryArtistDto,
   UpdateArtistDto,
 } from './dto';
-import { Artist, ArtistDocument } from './entities/artist.entity';
+import { Artist, TArtistDocument } from './entities/artist.entity';
 
 @ApiTags('Artists')
 @Controller({
@@ -42,7 +42,7 @@ export class ArtistsController {
     description: 'The artist has been successfully created.',
     type: Artist,
   })
-  create(@Body() createArtistDto: CreateArtistDto): Promise<ArtistDocument> {
+  create(@Body() createArtistDto: CreateArtistDto): Promise<TArtistDocument> {
     return this.artistsService.create(createArtistDto);
   }
 
@@ -75,7 +75,7 @@ export class ArtistsController {
   @ApiResponse({ status: 200, description: 'List of artists.', type: [Artist] })
   findPaginated(
     @Query() queryData: QueryArtistDto,
-  ): Promise<IPaginationResponse<ArtistDocument>> {
+  ): Promise<IPaginationResponse<TArtistDocument>> {
     const { page, limit, sort, field } = queryData;
     return this.artistsService.findPaginated(page, limit, sort, field);
   }
@@ -85,7 +85,7 @@ export class ArtistsController {
   @ApiParam({ name: 'id', description: 'ID of the artist', type: String })
   @ApiResponse({ status: 200, description: 'The artist data.', type: Artist })
   @ApiResponse({ status: 404, description: 'Artist not found.' })
-  findOne(@Param() paramData: ParamArtistDto): Promise<ArtistDocument> {
+  findOne(@Param() paramData: ParamArtistDto): Promise<TArtistDocument> {
     return this.artistsService.findOne(paramData.id);
   }
 
@@ -101,7 +101,7 @@ export class ArtistsController {
   update(
     @Param() paramData: ParamArtistDto,
     @Body() updateArtistDto: UpdateArtistDto,
-  ): Promise<ArtistDocument> {
+  ): Promise<TArtistDocument> {
     return this.artistsService.update(paramData.id, updateArtistDto);
   }
 
@@ -114,7 +114,7 @@ export class ArtistsController {
     type: Artist,
   })
   @ApiResponse({ status: 404, description: 'Not Found.' })
-  remove(@Param() paramData: ParamArtistDto): Promise<ArtistDocument> {
+  remove(@Param() paramData: ParamArtistDto): Promise<TArtistDocument> {
     return this.artistsService.remove(paramData.id);
   }
 }
