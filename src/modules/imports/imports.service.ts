@@ -20,6 +20,7 @@ import { WritersService } from '@app/modules/writers/writers.service';
 import { IPlay } from '@app/types';
 import { EAlbumType } from '@app/types/enums/album';
 import { ICsvRecord } from '@app/types/interfaces/csv';
+import { getDateFromMonth } from '@app/utils';
 
 interface IParsedRecord {
   songTitle: string;
@@ -447,15 +448,36 @@ export class ImportService {
       data;
     const str = this.removeFootnotesFromString(data.title);
     const title = this.removeExtraSpaceBeforeQuestionMark(str);
+
     try {
       const existingSong = await this.songsService.findOneByTitleArtistsAndYear(
         title,
         artistIds,
         year,
       );
+
       this.logger.debug(
         `Found existing song: "${title}" [ID: ${existingSong.id}]`,
       );
+
+      this.logger.log(
+        `Updating plays for song: "${existingSong.title}" [ID: ${existingSong.id}]`,
+      );
+
+      // Ensure plays are unique before adding
+      const existingPlaysSet = new Set(
+        existingSong.plays.map((play) => JSON.stringify(play)),
+      );
+      const uniquePlays = plays.filter(
+        (play) => !existingPlaysSet.has(JSON.stringify(play)),
+      );
+
+      if (uniquePlays.length > 0) {
+        existingSong.plays.push(...uniquePlays);
+        existingSong.markModified('plays'); // Ensure Mongoose detects the change
+        await existingSong.save();
+      }
+
       return existingSong.id;
     } catch (error) {
       if (error instanceof NotFoundException) {
@@ -537,7 +559,6 @@ export class ImportService {
    */
   private parsePlayCounts(record: ICsvRecord): IPlay[] {
     const plays: IPlay[] = [];
-    const currentYear = new Date().getFullYear();
 
     for (const [key, value] of Object.entries(record)) {
       if (key.startsWith('Plays - ')) {
@@ -549,7 +570,13 @@ export class ImportService {
           continue;
         }
 
-        const monthDate = new Date(`${monthName} 1, ${currentYear}`);
+        const monthDate = getDateFromMonth(monthName);
+
+        if (isNaN(monthDate.getTime())) {
+          this.logger.warn(`Invalid month name: "${monthName}"`);
+          continue;
+        }
+
         if (isNaN(monthDate.getTime())) {
           this.logger.warn(`Invalid month name: "${monthName}"`);
           continue;
