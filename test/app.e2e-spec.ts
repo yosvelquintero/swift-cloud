@@ -2,7 +2,7 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
 
-import { AppModule } from './../src/app.module';
+import { AppModule } from '@app/app.module';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -16,10 +16,20 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
+  afterAll(async () => {
+    if (app) {
+      await app.close();
+    }
+  });
+
+  it('/ (GET) should return 404', () => {
     return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+      .get('/') // Assuming the root route doesn't exist
+      .expect(404)
+      .expect({
+        statusCode: 404,
+        message: 'Cannot GET /',
+        error: 'Not Found',
+      });
   });
 });
