@@ -13,10 +13,19 @@ import { PAGINATION } from './config';
 import { ESortOrder, IPaginationResponse } from './types';
 
 export abstract class EntityRepository<T extends Document> {
-  private readonly logger = new Logger(EntityRepository.name);
+  readonly logger = new Logger(EntityRepository.name);
 
   constructor(protected readonly entityModel: Model<T>) {}
 
+  /**
+   * Finds multiple documents in the collection.
+   *
+   * @param filter A mongodb filter query.
+   * @param projection A mongodb projection query.
+   * @param options A mongodb query options object.
+   *
+   * @returns A promise to an array of documents.
+   */
   async find(
     filter: FilterQuery<T>,
     projection?: Record<string, any>,
@@ -45,6 +54,19 @@ export abstract class EntityRepository<T extends Document> {
     }
   }
 
+  /**
+   * Finds multiple documents in the collection, paginated.
+   *
+   * @param filter A mongodb filter query.
+   * @param projection A mongodb projection query.
+   * @param options A mongodb query options object.
+   * @param page The page to retrieve.
+   * @param limit The number of items per page.
+   * @param sort The sort order.
+   * @param field The field to sort by.
+   *
+   * @returns A promise that resolves to the paginated result.
+   */
   async findPaginated(
     filter: FilterQuery<T>,
     projection?: Record<string, any>,
@@ -95,6 +117,15 @@ export abstract class EntityRepository<T extends Document> {
     }
   }
 
+  /**
+   * Finds one document in the collection.
+   *
+   * @param filter A mongodb filter query.
+   * @param projection A mongodb projection query.
+   * @param options A mongodb query options object.
+   *
+   * @returns A promise to the found document.
+   */
   async findOne(
     filter: FilterQuery<T>,
     projection?: Record<string, any>,
@@ -123,6 +154,13 @@ export abstract class EntityRepository<T extends Document> {
     }
   }
 
+  /**
+   * Creates a new document in the collection.
+   *
+   * @param data The data to create the document with.
+   *
+   * @returns A promise to the created document.
+   */
   async create(data: AnyKeys<T> & AnyObject): Promise<T> {
     try {
       const entity = new this.entityModel(data);
@@ -137,6 +175,15 @@ export abstract class EntityRepository<T extends Document> {
     }
   }
 
+  /**
+   * Finds one document in the collection and updates it.
+   *
+   * @param filter A mongodb filter query.
+   * @param data The data to update the document with.
+   * @param options A mongodb query options object.
+   *
+   * @returns A promise to the updated document.
+   */
   async findOneAndUpdate(
     filter: FilterQuery<T>,
     data: UpdateQuery<T>,
@@ -169,6 +216,14 @@ export abstract class EntityRepository<T extends Document> {
     }
   }
 
+  /**
+   * Finds one document in the collection and deletes it.
+   *
+   * @param filter A mongodb filter query.
+   * @param options A mongodb query options object.
+   *
+   * @returns A promise to the deleted document.
+   */
   async findOneAndDelete(
     filter: FilterQuery<T>,
     options?: QueryOptions & { populate?: any },
@@ -194,6 +249,14 @@ export abstract class EntityRepository<T extends Document> {
     }
   }
 
+  /**
+   * Handles the case when a document is not found.
+   *
+   * @param entity The document that was not found.
+   * @param filter The filter used to query for the document.
+   *
+   * @returns The found document, or throws a NotFoundException if not found.
+   */
   private handleNotFound(entity: T, filter: FilterQuery<T>): T {
     if (!entity) {
       throw new NotFoundException(
