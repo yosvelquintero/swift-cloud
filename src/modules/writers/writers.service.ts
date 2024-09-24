@@ -36,12 +36,20 @@ export class WritersService {
    * @param limit The number of items per page.
    * @param sort The sort order.
    * @param field The field to sort by.
+   * @param search The search query.
    *
    * @returns A promise that resolves to the paginated result.
    */
-  findPaginated(page: number, limit: number, sort: ESortOrder, field: string) {
+  findPaginated(
+    page: number,
+    limit: number,
+    sort: ESortOrder,
+    field: string,
+    search?: string,
+  ) {
+    const filter = search ? { name: { $regex: search, $options: 'i' } } : {};
     return this.writersRepository.findPaginated(
-      {},
+      { ...filter },
       {},
       {},
       page,

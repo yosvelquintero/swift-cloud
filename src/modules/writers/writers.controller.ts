@@ -72,12 +72,22 @@ export class WritersController {
     type: Number,
     required: false,
   })
-  @ApiResponse({ status: 200, description: 'List of writers.', type: [Writer] })
+  @ApiQuery({
+    name: 'search',
+    description: 'Search query',
+    type: String,
+    required: false,
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'List of paginated writers.',
+    type: [Writer],
+  })
   findPaginated(
     @Query() queryData: QueryWriterDto,
   ): Promise<IPaginationResponse<TWriterDocument>> {
-    const { page, limit, sort, field } = queryData;
-    return this.writersService.findPaginated(page, limit, sort, field);
+    const { page, limit, sort, field, search } = queryData;
+    return this.writersService.findPaginated(page, limit, sort, field, search);
   }
 
   @Get(':id')
