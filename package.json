@@ -1,7 +1,7 @@
 {
   "name": "swift-cloud",
   "version": "0.0.1",
-  "description": "The #1 app for Taylor Swifties!",
+  "description": "Demo API using TypeScript, NestJS, MongoDB and Swagger",
   "author": "",
   "private": true,
   "license": "MIT",

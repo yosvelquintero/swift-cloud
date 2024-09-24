@@ -1,6 +1,6 @@
 # SwiftCloud
 
-**The #1 app for Taylor Swifties!**
+**Demo API using TypeScript, NestJS, MongoDB and Swagger**
 
 This is a NestJS project that provides a flexible API for song data, including songs, artists, writers, and albums. The API is built using MongoDB and is designed to be scalable and maintainable.
 
