@@ -8,8 +8,8 @@ import {
   Min,
 } from 'class-validator';
 
-import { PAGINATION } from '@app/config';
-import { ESortOrder } from '@app/types';
+import { PAGINATION } from '../../config';
+import { ESortOrder } from '../../types';
 
 export class QueryPaginationDto {
   @IsOptional()

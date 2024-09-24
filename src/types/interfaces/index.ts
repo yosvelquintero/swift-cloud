@@ -1,5 +1,6 @@
 export * from './album';
 export * from './artist';
+export * from './csv';
 export * from './database';
 export * from './env';
 export * from './mongoose-schema-options';
