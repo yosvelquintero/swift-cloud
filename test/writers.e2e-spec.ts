@@ -2,10 +2,10 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
 
-import { AppModule } from '@app/app.module';
-import { CreateWriterDto, UpdateWriterDto } from '@app/modules/writers/dto';
-import { TWriterDocument } from '@app/modules/writers/entities/writer.entity';
-import { WritersService } from '@app/modules/writers/writers.service';
+import { AppModule } from '../src/app.module';
+import { CreateWriterDto, UpdateWriterDto } from '../src/modules/writers/dto';
+import { TWriterDocument } from '../src/modules/writers/entities/writer.entity';
+import { WritersService } from '../src/modules/writers/writers.service';
 
 describe('WritersController (e2e)', () => {
   let app: INestApplication;

@@ -2,10 +2,10 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
 
-import { AppModule } from '@app/app.module';
-import { AlbumsService } from '@app/modules/albums/albums.service';
-import { CreateAlbumDto, UpdateAlbumDto } from '@app/modules/albums/dto';
-import { TAlbumDocument } from '@app/modules/albums/entities/album.entity';
+import { AppModule } from '../src/app.module';
+import { AlbumsService } from '../src/modules/albums/albums.service';
+import { CreateAlbumDto, UpdateAlbumDto } from '../src/modules/albums/dto';
+import { TAlbumDocument } from '../src/modules/albums/entities/album.entity';
 
 describe('AlbumsController (e2e)', () => {
   let app: INestApplication;

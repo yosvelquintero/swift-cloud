@@ -3,10 +3,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { Types } from 'mongoose';
 import * as request from 'supertest';
 
-import { AppModule } from '@app/app.module';
-import { CreateSongDto, UpdateSongDto } from '@app/modules/songs/dto';
-import { TSongDocument } from '@app/modules/songs/entities/song.entity';
-import { SongsService } from '@app/modules/songs/songs.service';
+import { AppModule } from '../src/app.module';
+import { CreateSongDto, UpdateSongDto } from '../src/modules/songs/dto';
+import { TSongDocument } from '../src/modules/songs/entities/song.entity';
+import { SongsService } from '../src/modules/songs/songs.service';
 
 describe('SongsController (e2e)', () => {
   let app: INestApplication;

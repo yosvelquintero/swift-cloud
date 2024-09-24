@@ -2,10 +2,10 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
 
-import { AppModule } from '@app/app.module';
-import { ArtistsService } from '@app/modules/artists/artists.service';
-import { CreateArtistDto, UpdateArtistDto } from '@app/modules/artists/dto';
-import { TArtistDocument } from '@app/modules/artists/entities/artist.entity';
+import { AppModule } from '../src/app.module';
+import { ArtistsService } from '../src/modules/artists/artists.service';
+import { CreateArtistDto, UpdateArtistDto } from '../src/modules/artists/dto';
+import { TArtistDocument } from '../src/modules/artists/entities/artist.entity';
 
 describe('ArtistsController (e2e)', () => {
   let app: INestApplication;
