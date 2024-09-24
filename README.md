@@ -230,15 +230,36 @@ For a complete and interactive documentation of the API, visit the Swagger UI ho
 
 ## Resources
 
-This project was built using the [NestJS](https://nestjs.com) framework. Below are some resources to help you get started with NestJS:
+This project was built using TypeScript, Node.js, NestJS, and Swagger. Below are some resources to help you get started and dive deeper into these technologies:
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+### TypeScript
+
+- [Official TypeScript Documentation](https://www.typescriptlang.org/docs/): Comprehensive guide and reference for TypeScript, covering all aspects from basic types to advanced usage.
+
+### Node.js
+
+- [Node.js Documentation](https://nodejs.org/en/docs/): Official documentation for Node.js, providing resources for learning about core modules, async programming, and Node.js APIs.
+
+### NestJS
+
+- [NestJS Documentation](https://docs.nestjs.com/): Official NestJS documentation, including tutorials, guides, and API references to help you build efficient, scalable Node.js applications.
+
+- [NestJS Devtools](https://devtools.nestjs.com/): Visualize your application graph and interact with the NestJS application in real-time using NestJS Devtools.
+
+- [NestJS Enterprise Support](https://enterprise.nestjs.com): For companies needing dedicated support, NestJS offers official enterprise support options.
+
+- [NestJS Video Courses](https://courses.nestjs.com/): Official NestJS courses for more hands-on learning and experience.
+
+### Swagger
+
+- [Swagger Documentation](https://swagger.io/docs/): Official Swagger documentation that provides guides and examples for integrating Swagger into your APIs and enhancing API documentation.
+
+### Community and Support
+
+- **Discord**: Join the [NestJS Discord Channel](https://discord.gg/G7Qnnhy) for real-time support and discussion with other developers.
+- **X (formerly Twitter)**: Follow [NestJS on X](https://x.com/nestframework) for updates and community news.
+- **LinkedIn**: Connect with the [NestJS community on LinkedIn](https://linkedin.com/company/nestjs).
+- **Jobs Board**: Looking for a job, or have a job to offer? Check out the [NestJS Jobs Board](https://jobs.nestjs.com).
 
 ## Stay in touch
 
