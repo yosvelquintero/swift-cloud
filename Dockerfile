@@ -10,6 +10,8 @@ COPY . .
 
 RUN npm run build
 
+EXPOSE 3000
+
 # Stage 2: Run the app
 FROM node:18
 
