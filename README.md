@@ -1,6 +1,6 @@
 # SwiftCloud
 
-**Demo API using TypeScript, NestJS, MongoDB and Swagger**
+Demo API using TypeScript, NestJS, MongoDB and Swagger
 
 This is a NestJS project that provides a flexible API for song data, including songs, artists, writers, and albums. The API is built using MongoDB and is designed to be scalable and maintainable.
 
@@ -48,6 +48,8 @@ $ npm run test:cov
 
 ## Import data
 
+To import songs data from a CSV file, use the following command:
+
 ```bash
 # import data
 $ npm run import path/to/your/file.csv
@@ -55,7 +57,7 @@ $ npm run import path/to/your/file.csv
 
 ### Normalization and Replacements in Names and Titles
 
-During the import process of song data from the CSV file, several normalization steps are performed to ensure consistency and accuracy in the database. This involves cleaning up artist names, writer names, album titles, and song titles by removing footnotes, special characters, and unnecessary whitespace. Understanding these replacements is crucial for maintaining data integrity.
+During the import process of songs data from the CSV file, several normalization steps are performed to ensure consistency and accuracy in the database. This involves cleaning up artist names, writer names, album titles, and song titles by removing footnotes, special characters, and unnecessary whitespace. Understanding these replacements is crucial for maintaining data integrity.
 
 #### Replacements in Names
 
