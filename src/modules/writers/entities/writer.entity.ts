@@ -16,18 +16,34 @@ export type TWriterDocument = Writer & Document;
 )
 export class Writer implements IWriter {
   @Prop({
+    unique: true,
+    required: false,
+  })
+  @ApiProperty({
+    description: 'The writer ID',
+    required: false,
+  })
+  id?: string;
+
+  @Prop({
     required: true,
     unique: true,
   })
-  @ApiProperty()
+  @ApiProperty({
+    description: 'The writer name',
+  })
   name: string;
 
   @Prop()
-  @ApiProperty()
+  @ApiProperty({
+    description: 'The writer creation',
+  })
   created: Date;
 
   @Prop()
-  @ApiProperty()
+  @ApiProperty({
+    description: 'The writer last update',
+  })
   updated: Date;
 }
 

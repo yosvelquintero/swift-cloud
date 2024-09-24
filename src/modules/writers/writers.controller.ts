@@ -23,6 +23,7 @@ import {
   ParamWriterDto,
   QueryWriterDto,
   UpdateWriterDto,
+  WriterDto,
 } from './dto';
 import { TWriterDocument, Writer } from './entities/writer.entity';
 import { WritersService } from './writers.service';
@@ -81,7 +82,7 @@ export class WritersController {
   @ApiResponse({
     status: 200,
     description: 'List of paginated writers.',
-    type: [Writer],
+    type: [WriterDto],
   })
   findPaginated(
     @Query() queryData: QueryWriterDto,
