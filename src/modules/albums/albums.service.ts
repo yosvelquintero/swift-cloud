@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
-import { DATABASE } from '@app/config';
-import { ESortOrder } from '@app/types';
-
+import { DATABASE } from '../../config';
+import { ESortOrder } from '../../types';
 import { AlbumsRepository } from './albums.repository';
 import { CreateAlbumDto, UpdateAlbumDto } from './dto';
 

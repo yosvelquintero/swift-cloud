@@ -2,8 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
-import { EntityRepository } from '@app/entity.repository';
-
+import { EntityRepository } from '../../entity.repository';
 import { Album, TAlbumDocument } from './entities/album.entity';
 
 @Injectable()

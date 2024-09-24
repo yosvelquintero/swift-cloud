@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { IPaginationResponse } from '@app/types';
-
+import { IPaginationResponse } from '../../../types';
 import { Album, TAlbumDocument } from '../entities/album.entity';
 
 export class AlbumDto implements IPaginationResponse<TAlbumDocument> {

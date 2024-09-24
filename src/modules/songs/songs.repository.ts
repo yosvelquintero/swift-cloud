@@ -2,10 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { FilterQuery, Model, QueryOptions } from 'mongoose';
 
-import { DATABASE } from '@app/config';
-import { EntityRepository } from '@app/entity.repository';
-import { ESortOrder, IPaginationResponse } from '@app/types';
-
+import { DATABASE } from '../../config';
+import { EntityRepository } from '../../entity.repository';
+import { ESortOrder, IPaginationResponse } from '../../types';
 import { Song, TSongDocument } from './entities/song.entity';
 
 @Injectable()

@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
 
-import { AlbumsModule } from '@app/modules/albums/albums.module';
-import { ArtistsModule } from '@app/modules/artists/artists.module';
-import { SongsModule } from '@app/modules/songs/songs.module';
-import { WritersModule } from '@app/modules/writers/writers.module';
-
+import { AlbumsModule } from '../../modules/albums/albums.module';
+import { ArtistsModule } from '../../modules/artists/artists.module';
+import { SongsModule } from '../../modules/songs/songs.module';
+import { WritersModule } from '../../modules/writers/writers.module';
 import { ImportService } from './imports.service';
 
 @Module({

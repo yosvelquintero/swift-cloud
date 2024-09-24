@@ -3,11 +3,11 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Document, Types } from 'mongoose';
 import * as uniqueValidator from 'mongoose-unique-validator';
 
-import { DATABASE } from '@app/config';
-import { Artist } from '@app/modules/artists/entities/artist.entity';
-import { Song } from '@app/modules/songs/entities/song.entity';
-import { IAlbum } from '@app/types';
-import { getMongooseSchemaOptions } from '@app/utils';
+import { DATABASE } from '../../../config';
+import { Artist } from '../../../modules/artists/entities/artist.entity';
+import { Song } from '../../../modules/songs/entities/song.entity';
+import { IAlbum } from '../../../types';
+import { getMongooseSchemaOptions } from '../../../utils';
 
 export type TAlbumDocument = Album & Document;
 

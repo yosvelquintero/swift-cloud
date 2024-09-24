@@ -1,3 +1,3 @@
-import { QueryPaginationDto } from '@app/utils';
+import { QueryPaginationDto } from '../../../utils';
 
 export class QueryWriterDto extends QueryPaginationDto {}

@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { IPaginationResponse } from '@app/types';
-
+import { IPaginationResponse } from '../../../types';
 import { TWriterDocument, Writer } from '../entities/writer.entity';
 
 export class WriterDto implements IPaginationResponse<TWriterDocument> {

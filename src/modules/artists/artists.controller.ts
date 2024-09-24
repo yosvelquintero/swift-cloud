@@ -16,8 +16,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 
-import { ESortOrder, IPaginationResponse } from '@app/types';
-
+import { ESortOrder, IPaginationResponse } from '../../types';
 import { ArtistsService } from './artists.service';
 import {
   ArtistDto,

@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import { ESortOrder } from '@app/types';
-
+import { ESortOrder } from '../../types';
 import { CreateWriterDto, UpdateWriterDto } from './dto';
 import { WritersRepository } from './writers.repository';
 

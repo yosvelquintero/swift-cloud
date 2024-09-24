@@ -10,17 +10,15 @@ import { Types } from 'mongoose';
 import { Observable } from 'rxjs';
 import { finalize, mergeMap } from 'rxjs/operators';
 
-import { AlbumsService } from '@app/modules/albums/albums.service';
-import { CreateAlbumDto } from '@app/modules/albums/dto';
-import { TAlbumDocument } from '@app/modules/albums/entities/album.entity';
-import { ArtistsService } from '@app/modules/artists/artists.service';
-import { CreateSongDto } from '@app/modules/songs/dto/create-song.dto';
-import { SongsService } from '@app/modules/songs/songs.service';
-import { WritersService } from '@app/modules/writers/writers.service';
-import { IPlay } from '@app/types';
-import { EAlbumType } from '@app/types/enums/album';
-import { ICsvRecord } from '@app/types/interfaces/csv';
-import { getDateFromMonth } from '@app/utils';
+import { AlbumsService } from '../../modules/albums/albums.service';
+import { CreateAlbumDto } from '../../modules/albums/dto';
+import { TAlbumDocument } from '../../modules/albums/entities/album.entity';
+import { ArtistsService } from '../../modules/artists/artists.service';
+import { CreateSongDto } from '../../modules/songs/dto/create-song.dto';
+import { SongsService } from '../../modules/songs/songs.service';
+import { WritersService } from '../../modules/writers/writers.service';
+import { EAlbumType, ICsvRecord, IPlay } from '../../types';
+import { getDateFromMonth } from '../../utils';
 
 interface IParsedRecord {
   songTitle: string;

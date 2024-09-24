@@ -3,9 +3,9 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Document } from 'mongoose';
 import * as uniqueValidator from 'mongoose-unique-validator';
 
-import { DATABASE } from '@app/config';
-import { IWriter } from '@app/types';
-import { getMongooseSchemaOptions } from '@app/utils';
+import { DATABASE } from '../../../config';
+import { IWriter } from '../../../types';
+import { getMongooseSchemaOptions } from '../../../utils';
 
 export type TWriterDocument = Writer & Document;
 
