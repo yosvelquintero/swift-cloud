@@ -1,6 +1,6 @@
 import { DeepReadonly } from 'ts-essentials';
 
-import { IPagination } from '@app/types';
+import { IPagination } from '../../types';
 
 export const PAGINATION: DeepReadonly<IPagination> = {
   limit: 10,

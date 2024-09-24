@@ -7,7 +7,7 @@ import {
 import { json, urlencoded } from 'express';
 import helmet from 'helmet';
 
-import { ValidationErrorFilter } from '@app/filters';
+import { ValidationErrorFilter } from '../filters';
 
 export const settingsConfig = (app: INestApplication, prefix: string): void => {
   // Security middleware using Helmet

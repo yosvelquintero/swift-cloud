@@ -1,6 +1,6 @@
 import { DeepReadonly } from 'ts-essentials';
 
-import { IDatabase } from '@app/types';
+import { IDatabase } from '../../types';
 
 export const DATABASE: DeepReadonly<IDatabase> = {
   mongodb: {
