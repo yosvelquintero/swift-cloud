@@ -156,19 +156,26 @@ I Don't Wanna Live Forever
 
 Here is what each key-value pair represents:
 
-- `none` ➔ `EAlbumType.SINGLE`
-  - Indicates the song is released as a single without an associated album.
-- `none[a]` ➔ `EAlbumType.REMIX`
+- `none` ➔ Single
+  <!-- - `none` ➔ `EAlbumType.SINGLE` -->
+  - Indicates the song is released as a single.
+- `none[a]` ➔ Remix
+  <!-- - `none[a]` ➔ `EAlbumType.REMIX` -->
   - Represents a remix version of a song.
-- `none[b]` ➔ `EAlbumType.PROMO`
+- `none[b]` ➔ Promo
+  <!-- - `none[b]` ➔ `EAlbumType.PROMO` -->
   - Denotes a promotional release.
-- `none[c]` ➔ `EAlbumType.LIVE`
+- `none[c]` ➔ Live
+  <!-- - `none[c]` ➔ `EAlbumType.LIVE` -->
   - Signifies a live performance recording.
-- `none[d]` ➔ `EAlbumType.SOUNDTRACK`
+- `none[d]` ➔ Soundtrack
+  <!-- - `none[d]` ➔ `EAlbumType.SOUNDTRACK` -->
   - Indicates the song is part of a movie or game soundtrack.
-- `none[e]` ➔ `EAlbumType.STANDARD`
+- `none[e]` ➔ Standard
+  <!-- - `none[e]` ➔ `EAlbumType.STANDARD` -->
   - Represents a standard album release.
-- `none[f]` ➔ `EAlbumType.OTHER`
+- `none[f]` ➔ Other
+  <!-- - `none[f]` ➔ `EAlbumType.OTHER` -->
   - Covers any other album types not specifically categorized.
 
 ### Importance of Replacements
@@ -177,6 +184,49 @@ Here is what each key-value pair represents:
 - **Accurate Matching**: Facilitates the correct identification of existing records in the database, preventing duplicates.
 - **Clean Data**: Removes unnecessary annotations and footnotes that are not essential, leading to a cleaner dataset.
 - **Improved Searchability**: Standardized data enhances search functionality and retrieval accuracy within the application.
+
+## Swagger API Documentation
+
+The SwiftCloud API is well-documented using Swagger, providing an interactive interface to explore the API. Below is an overview of the main endpoints available:
+
+Albums
+
+- `GET /api/v1/albums`: Retrieve a paginated list of albums.
+- `POST /api/v1/albums`: Create a new album.
+- `GET /api/v1/albums/{id}`: Retrieve a specific album by ID.
+- `PATCH /api/v1/albums/{id}`: Update an album by ID.
+- `DELETE /api/v1/albums/{id}`: Delete an album by ID.
+
+Songs
+
+- `GET /api/v1/songs`: Retrieve a paginated list of songs.
+- `POST /api/v1/songs`: Create a new song.
+- `GET /api/v1/songs/album/{id}`: Find paginated songs by album ID.
+- `GET /api/v1/songs/year/{year}`: Find songs by release year.
+- `GET /api/v1/songs/most-popular`: Get the most popular songs for a given date.
+- `GET /api/v1/songs/{id}`: Retrieve a specific song by ID.
+- `PATCH /api/v1/songs/{id}`: Update a song by ID.
+- `DELETE /api/v1/songs/{id}`: Delete a song by ID.
+
+Artists
+
+- `GET /api/v1/artists`: Retrieve a paginated list of artists.
+- `POST /api/v1/artists`: Create a new artist.
+- `GET /api/v1/artists/{id}`: Retrieve a specific artist by ID.
+- `PATCH /api/v1/artists/{id}`: Update an artist by ID.
+- `DELETE /api/v1/artists/{id}`: Delete an artist by ID.
+
+Writers
+
+- `GET /api/v1/writers`: Retrieve a paginated list of writers.
+- `POST /api/v1/writers`: Create a new writer.
+- `GET /api/v1/writers/{id}`: Retrieve a specific writer by ID.
+- `PATCH /api/v1/writers/{id}`: Update a writer by ID.
+- `DELETE /api/v1/writers/{id}`: Delete a writer by ID.
+
+For a complete and interactive documentation of the API, visit the Swagger UI hosted at /swagger once the application is running.
+
+![Swagger UI](./Swagger-UI.png)
 
 ## Resources
 
