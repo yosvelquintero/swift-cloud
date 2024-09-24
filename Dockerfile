@@ -16,7 +16,7 @@ FROM node:18
 WORKDIR /app
 
 COPY --from=build /app/package*.json ./
-RUN npm install --only=production
+RUN npm install
 
 COPY --from=build /app/dist ./dist
 
