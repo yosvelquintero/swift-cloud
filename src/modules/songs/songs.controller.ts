@@ -23,6 +23,7 @@ import {
   ParamSongDto,
   ParamYearSongDto,
   QuerySongDto,
+  SongDto,
   UpdateSongDto,
 } from './dto';
 import { Song, TSongDocument } from './entities/song.entity';
@@ -79,7 +80,7 @@ export class SongsController {
     type: String,
     required: false,
   })
-  @ApiResponse({ status: 200, description: 'List of songs.', type: [Song] })
+  @ApiResponse({ status: 200, description: 'List of songs.', type: [SongDto] })
   findPaginated(
     @Query() queryData: QuerySongDto,
   ): Promise<IPaginationResponse<TSongDocument>> {
@@ -127,7 +128,7 @@ export class SongsController {
   @ApiResponse({
     status: 200,
     description: 'List of songs from the specified album.',
-    type: [Song],
+    type: [SongDto],
   })
   findByAlbumId(
     @Param() paramData: ParamSongDto,
@@ -184,7 +185,7 @@ export class SongsController {
   @ApiResponse({
     status: 200,
     description: 'List of songs released in the given year.',
-    type: [Song],
+    type: [SongDto],
   })
   findByYear(
     @Param() paramData: ParamYearSongDto,
@@ -245,7 +246,7 @@ export class SongsController {
   @ApiResponse({
     status: 200,
     description: 'List of most popular songs for the date.',
-    type: [Song],
+    type: [SongDto],
   })
   findMostPopular(
     @Query() queryData: QuerySongDto,

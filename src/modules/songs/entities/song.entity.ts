@@ -31,8 +31,20 @@ const PlaySchema = SchemaFactory.createForClass(Play);
   }),
 )
 export class Song implements ISong {
+  @Prop({
+    unique: true,
+    required: false,
+  })
+  @ApiProperty({
+    description: 'The song ID',
+    required: false,
+  })
+  id?: string;
+
   @Prop({ required: true })
-  @ApiProperty()
+  @ApiProperty({
+    description: 'The song title',
+  })
   title: string;
 
   @Prop({
@@ -115,11 +127,15 @@ export class Song implements ISong {
   plays: Play[];
 
   @Prop()
-  @ApiProperty()
+  @ApiProperty({
+    description: 'The song creation',
+  })
   created: Date;
 
   @Prop()
-  @ApiProperty()
+  @ApiProperty({
+    description: 'The song last update',
+  })
   updated: Date;
 }
 
