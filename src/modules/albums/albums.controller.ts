@@ -20,6 +20,7 @@ import { ESortOrder, IPaginationResponse } from '@app/types';
 
 import { AlbumsService } from './albums.service';
 import {
+  AlbumDto,
   CreateAlbumDto,
   ParamAlbumDto,
   QueryAlbumDto,
@@ -78,7 +79,11 @@ export class AlbumsController {
     type: String,
     required: false,
   })
-  @ApiResponse({ status: 200, description: 'List of albums.', type: [Album] })
+  @ApiResponse({
+    status: 200,
+    description: 'List of albums.',
+    type: [AlbumDto],
+  })
   findPaginated(
     @Query() queryData: QueryAlbumDto,
   ): Promise<IPaginationResponse<TAlbumDocument>> {

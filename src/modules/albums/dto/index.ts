@@ -1,3 +1,4 @@
+export * from './album.dto';
 export * from './create-album.dto';
 export * from './param-id-album.dto';
 export * from './query-album.dto';

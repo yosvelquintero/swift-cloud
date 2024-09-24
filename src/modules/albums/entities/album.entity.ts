@@ -18,7 +18,20 @@ export type TAlbumDocument = Album & Document;
 )
 export class Album implements IAlbum {
   @Prop({
+    unique: true,
+    required: false,
+  })
+  @ApiProperty({
+    description: 'The album ID',
+    required: false,
+  })
+  id?: string;
+
+  @Prop({
     required: true,
+  })
+  @ApiProperty({
+    description: 'The album title',
   })
   title: string;
 
@@ -54,16 +67,22 @@ export class Album implements IAlbum {
   })
   songIds: Types.ObjectId[];
 
-  @Prop()
-  @ApiProperty()
+  @Prop({})
+  @ApiProperty({
+    description: 'The album year',
+  })
   year: number;
 
   @Prop()
-  @ApiProperty()
+  @ApiProperty({
+    description: 'The album creation',
+  })
   created: Date;
 
   @Prop()
-  @ApiProperty()
+  @ApiProperty({
+    description: 'The album last update',
+  })
   updated: Date;
 }
 
