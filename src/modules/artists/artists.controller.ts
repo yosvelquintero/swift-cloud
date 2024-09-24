@@ -72,12 +72,18 @@ export class ArtistsController {
     type: Number,
     required: false,
   })
+  @ApiQuery({
+    name: 'search',
+    description: 'Search query',
+    type: String,
+    required: false,
+  })
   @ApiResponse({ status: 200, description: 'List of artists.', type: [Artist] })
   findPaginated(
     @Query() queryData: QueryArtistDto,
   ): Promise<IPaginationResponse<TArtistDocument>> {
-    const { page, limit, sort, field } = queryData;
-    return this.artistsService.findPaginated(page, limit, sort, field);
+    const { page, limit, sort, field, search } = queryData;
+    return this.artistsService.findPaginated(page, limit, sort, field, search);
   }
 
   @Get(':id')
