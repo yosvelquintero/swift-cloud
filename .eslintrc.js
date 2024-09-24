@@ -29,8 +29,6 @@ module.exports = {
           ['^\\u0000'],
           // Packages (node_modules)
           ['^@?\\w'],
-          // Internal packages (e.g., '@app/*')
-          ['^@app(/.*|$)'],
           // Relative imports
           ['^\\.'],
         ],
