@@ -20,9 +20,55 @@ This is a NestJS project that provides a flexible API for song data, including s
 $ npm install
 ```
 
+## Create the .env File
+
+### Copy the .env-template File
+
+The project requires a `.env` file to store environment variables. To help you get started, a `.env-template` file is provided in the root directory. You can use this template to create your own .env file.
+
+```bash
+# copy the .env-template file to .env
+$ cp .env-template .env
+```
+
+### Update the .env File
+
+Open the `.env` file in your preferred text editor and update the values with your specific configuration:
+
+```plaintext
+# ----------------------------------------------------------------
+# APP
+# ----------------------------------------------------------------
+
+# API
+APP_API_NAME=<name>
+APP_API_VERSION=<version>
+APP_API_HOST=<host>
+APP_API_PORT=<port>
+APP_API_PREFIX=<prefix>
+APP_API_IS_SWAGGER_ENABLED=<is production>
+APP_API_SWAGGER_DESCRIPTION=<description>
+APP_API_SWAGGER_PREFIX=<swagger prefix>
+
+# ----------------------------------------------------------------
+# Databases
+# ----------------------------------------------------------------
+
+# MongoDB
+MONGODB_HOST=<mongodb host>
+MONGODB_DB=<mongodb db>
+MONGODB_USER=<mongodb user>
+MONGODB_PORT=<mongodb port>
+MONGODB_PASSWORD=<mongodb password>
+MONGODB_URI=<mongodb URI>
+```
+
 ## Compile and run the project
 
 ```bash
+# build
+$ npm run build
+
 # development
 $ npm run start
 
@@ -89,20 +135,6 @@ Shellback
 - Normalized names: Taylor Swift, Max Martin, Shellback
 
 ### Replacements in Album Titles
-
-#### Removing Footnotes from Titles
-
-Album titles may include footnotes to indicate special types or editions. These footnotes are mapped to standardized album types and removed from the title.
-
-- Footnote Mapping:
-  - None ➔ none: SINGLE,
-  - None[a] ➔ Album Type: REMIX
-  - None[b] ➔ Album Type: PROMO
-  - And so on.
-- Example:
-  - Original Title: None[a]
-  - Normalized Title: None
-  - Album Type: REMIX
 
 #### Removing Line Breaks and Spaces
 
