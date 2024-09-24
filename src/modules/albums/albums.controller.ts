@@ -72,12 +72,18 @@ export class AlbumsController {
     type: Number,
     required: false,
   })
+  @ApiQuery({
+    name: 'search',
+    description: 'Search query',
+    type: String,
+    required: false,
+  })
   @ApiResponse({ status: 200, description: 'List of albums.', type: [Album] })
   findPaginated(
     @Query() queryData: QueryAlbumDto,
   ): Promise<IPaginationResponse<TAlbumDocument>> {
-    const { page, limit, sort, field } = queryData;
-    return this.albumsService.findPaginated(page, limit, sort, field);
+    const { page, limit, sort, field, search } = queryData;
+    return this.albumsService.findPaginated(page, limit, sort, field, search);
   }
 
   @Get(':id')

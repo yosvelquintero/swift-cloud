@@ -46,14 +46,22 @@ export class AlbumsService {
    * @param limit The number of items per page.
    * @param sort The sort order.
    * @param field The field to sort by.
+   * @param search The search query.
    *
    * @returns A promise that resolves to the paginated result.
    */
-  findPaginated(page: number, limit: number, sort: ESortOrder, field: string) {
+  findPaginated(
+    page: number,
+    limit: number,
+    sort: ESortOrder,
+    field: string,
+    search?: string,
+  ) {
+    const filter = search ? { title: { $regex: search, $options: 'i' } } : {};
     return this.albumsRepository.findPaginated(
+      { ...filter },
       {},
-      {},
-      {},
+      { populate: this.populateFields },
       page,
       limit,
       sort,
@@ -90,11 +98,7 @@ export class AlbumsService {
     artistIds: string[],
     year: number,
   ) {
-    return this.albumsRepository.findOne(
-      { title, artistIds, year },
-      {},
-      { populate: this.populateFields },
-    );
+    return this.albumsRepository.findOne({ title, artistIds, year }, {}, {});
   }
 
   /**
