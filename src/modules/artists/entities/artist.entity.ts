@@ -16,18 +16,34 @@ export type TArtistDocument = Artist & Document;
 )
 export class Artist implements IArtist {
   @Prop({
+    unique: true,
+    required: false,
+  })
+  @ApiProperty({
+    description: 'The artist ID',
+    required: false,
+  })
+  id?: string;
+
+  @Prop({
     required: true,
     unique: true,
   })
-  @ApiProperty()
+  @ApiProperty({
+    description: 'The artist name',
+  })
   name: string;
 
   @Prop()
-  @ApiProperty()
+  @ApiProperty({
+    description: 'The artist creation',
+  })
   created: Date;
 
   @Prop()
-  @ApiProperty()
+  @ApiProperty({
+    description: 'The artist last update',
+  })
   updated: Date;
 }
 

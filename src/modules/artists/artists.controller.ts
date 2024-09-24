@@ -20,6 +20,7 @@ import { ESortOrder, IPaginationResponse } from '@app/types';
 
 import { ArtistsService } from './artists.service';
 import {
+  ArtistDto,
   CreateArtistDto,
   ParamArtistDto,
   QueryArtistDto,
@@ -78,7 +79,11 @@ export class ArtistsController {
     type: String,
     required: false,
   })
-  @ApiResponse({ status: 200, description: 'List of artists.', type: [Artist] })
+  @ApiResponse({
+    status: 200,
+    description: 'List of artists.',
+    type: [ArtistDto],
+  })
   findPaginated(
     @Query() queryData: QueryArtistDto,
   ): Promise<IPaginationResponse<TArtistDocument>> {
