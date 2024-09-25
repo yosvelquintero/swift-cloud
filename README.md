@@ -42,7 +42,7 @@ Open the `.env` file in your preferred text editor and update the values with yo
 
 # API
 APP_API_NAME=SwiftCloud API
-APP_API_VERSION=1.0
+APP_API_VERSION=0.0.1
 APP_API_HOST=http://localhost
 APP_API_PORT=3000
 APP_API_PREFIX=/api
