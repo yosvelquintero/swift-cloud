@@ -41,14 +41,14 @@ Open the `.env` file in your preferred text editor and update the values with yo
 # ----------------------------------------------------------------
 
 # API
-APP_API_NAME=<name>
-APP_API_VERSION=<version>
-APP_API_HOST=<host>
-APP_API_PORT=<port>
-APP_API_PREFIX=<prefix>
-APP_API_IS_SWAGGER_ENABLED=<is production>
-APP_API_SWAGGER_DESCRIPTION=<description>
-APP_API_SWAGGER_PREFIX=<swagger prefix>
+APP_API_NAME=SwiftCloud API
+APP_API_VERSION=1.0
+APP_API_HOST=http://localhost
+APP_API_PORT=3000
+APP_API_PREFIX=/api
+APP_API_IS_SWAGGER_ENABLED=true
+APP_API_SWAGGER_DESCRIPTION=Documentation
+APP_API_SWAGGER_PREFIX=/swagger
 
 # ----------------------------------------------------------------
 # Databases
