@@ -282,6 +282,12 @@ This project was built using TypeScript, Node.js, NestJS, and Swagger. Below are
 
 - [NestJS Video Courses](https://courses.nestjs.com/): Official NestJS courses for more hands-on learning and experience.
 
+### MongoDB
+
+- [MongoDB Documentation](https://docs.mongodb.com/manual/): Official documentation for MongoDB, providing an overview of its features, guides for getting started, and detailed explanations of various MongoDB concepts.
+
+- [Mongoose Documentation](https://mongoosejs.com/docs/): Documentation for Mongoose, the MongoDB object modeling tool designed to work in an asynchronous environment, providing a schema-based solution to model your application data.
+
 ### Swagger
 
 - [Swagger Documentation](https://swagger.io/docs/): Official Swagger documentation that provides guides and examples for integrating Swagger into your APIs and enhancing API documentation.
