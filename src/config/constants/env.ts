@@ -19,11 +19,6 @@ export const ENV: DeepReadonly<IEnv> = {
   },
   database: {
     mongodb: {
-      mongodbHost: 'MONGODB_HOST',
-      mongodbDb: 'MONGODB_DB',
-      mongodbUser: 'MONGODB_USER',
-      mongodbPort: 'MONGODB_PORT',
-      mongodbPassword: 'MONGODB_PASSWORD',
       mongodbUri: 'MONGODB_URI',
     },
   },

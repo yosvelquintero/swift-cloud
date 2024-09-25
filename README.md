@@ -55,11 +55,6 @@ APP_API_SWAGGER_PREFIX=/swagger
 # ----------------------------------------------------------------
 
 # MongoDB
-MONGODB_HOST=<mongodb host>
-MONGODB_DB=<mongodb db>
-MONGODB_USER=<mongodb user>
-MONGODB_PORT=<mongodb port>
-MONGODB_PASSWORD=<mongodb password>
 MONGODB_URI=<mongodb URI>
 ```
 

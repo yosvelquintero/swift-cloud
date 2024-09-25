@@ -15,11 +15,6 @@ export interface IEnv {
   };
   database: {
     mongodb: {
-      mongodbHost: string;
-      mongodbDb: string;
-      mongodbUser: string;
-      mongodbPort: string;
-      mongodbPassword: string;
       mongodbUri: string;
     };
   };
