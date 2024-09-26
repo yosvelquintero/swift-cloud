@@ -16,16 +16,6 @@ export type TWriterDocument = Writer & Document;
 )
 export class Writer implements IWriter {
   @Prop({
-    unique: true,
-    required: false,
-  })
-  @ApiProperty({
-    description: 'The writer ID',
-    required: false,
-  })
-  id?: string;
-
-  @Prop({
     required: true,
     unique: true,
   })
@@ -61,3 +51,6 @@ WriterSchema.index(
 
 // Add unique validation
 WriterSchema.plugin(uniqueValidator);
+
+WriterSchema.set('toObject', { virtuals: true });
+WriterSchema.set('toJSON', { virtuals: true });

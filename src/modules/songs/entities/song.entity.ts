@@ -31,16 +31,6 @@ const PlaySchema = SchemaFactory.createForClass(Play);
   }),
 )
 export class Song implements ISong {
-  @Prop({
-    unique: true,
-    required: false,
-  })
-  @ApiProperty({
-    description: 'The song ID',
-    required: false,
-  })
-  id?: string;
-
   @Prop({ required: true })
   @ApiProperty({
     description: 'The song title',

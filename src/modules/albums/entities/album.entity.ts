@@ -18,16 +18,6 @@ export type TAlbumDocument = Album & Document;
 )
 export class Album implements IAlbum {
   @Prop({
-    unique: true,
-    required: false,
-  })
-  @ApiProperty({
-    description: 'The album ID',
-    required: false,
-  })
-  id?: string;
-
-  @Prop({
     required: true,
   })
   @ApiProperty({

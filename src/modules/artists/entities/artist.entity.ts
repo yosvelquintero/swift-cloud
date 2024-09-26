@@ -16,16 +16,6 @@ export type TArtistDocument = Artist & Document;
 )
 export class Artist implements IArtist {
   @Prop({
-    unique: true,
-    required: false,
-  })
-  @ApiProperty({
-    description: 'The artist ID',
-    required: false,
-  })
-  id?: string;
-
-  @Prop({
     required: true,
     unique: true,
   })
@@ -61,3 +51,6 @@ ArtistSchema.index(
 
 // Add unique validation
 ArtistSchema.plugin(uniqueValidator);
+
+ArtistSchema.set('toObject', { virtuals: true });
+ArtistSchema.set('toJSON', { virtuals: true });
