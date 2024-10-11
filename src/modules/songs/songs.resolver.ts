@@ -6,8 +6,9 @@ import {
   registerEnumType,
   Resolver,
 } from '@nestjs/graphql';
-import { ESortOrder } from 'src/types';
-import { QueryPaginationBaseDto } from 'src/utils';
+
+import { ESortOrder } from '@app/types';
+import { QueryPaginationBaseDto } from '@app/utils';
 
 import { PaginatedSongs, QueryPaginationByYearSongsDto } from './dto';
 import { CreateSongDto } from './dto/create-song.dto';

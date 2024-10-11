@@ -1,7 +1,8 @@
 import { Field, InputType, Int } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
 import { IsNumber, Min } from 'class-validator';
-import { QueryPaginationBaseDto } from 'src/utils';
+
+import { QueryPaginationBaseDto } from '@app/utils';
 
 @InputType()
 export class QueryPaginationByYearSongsDto extends QueryPaginationBaseDto {

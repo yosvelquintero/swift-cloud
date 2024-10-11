@@ -1,5 +1,6 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { PaginationBaseDto } from 'src/utils';
+
+import { PaginationBaseDto } from '@app/utils';
 
 import { Song } from '../entities/song.entity';
 
