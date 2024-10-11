@@ -1,0 +1,198 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Artist {
+  id: ID!
+  name: String!
+  created: DateTime!
+  updated: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Writer {
+  id: ID!
+  name: String!
+  created: DateTime!
+  updated: DateTime!
+}
+
+type Play {
+  month: DateTime!
+  count: Int!
+}
+
+type Song {
+  id: ID!
+  title: String!
+  albumIds: [String!]!
+  albums: [Album!]
+  artistIds: [String!]
+  artists: [Artist!]
+  featuringArtistIds: [String!]
+  featuringArtists: [Artist!]
+  writerIds: [String!]
+  writers: [Writer!]
+  year: Int!
+  plays: [Play!]!
+  created: DateTime!
+  updated: DateTime!
+}
+
+type Album {
+  id: ID!
+  title: String!
+  artistIds: [String!]!
+  artists: [Artist!]
+  songIds: [String!]!
+  songs: [Song!]
+  year: Int!
+  created: DateTime!
+  updated: DateTime!
+}
+
+type PaginatedAlbums {
+  total: Int!
+  totalPages: Int!
+  page: Int!
+  limit: Int!
+  data: [Album!]!
+}
+
+type PaginatedArtists {
+  total: Int!
+  totalPages: Int!
+  page: Int!
+  limit: Int!
+  data: [Artist!]!
+}
+
+type PaginatedSongs {
+  total: Int!
+  totalPages: Int!
+  page: Int!
+  limit: Int!
+  data: [Song!]!
+}
+
+type PaginatedWriters {
+  total: Int!
+  totalPages: Int!
+  page: Int!
+  limit: Int!
+  data: [Writer!]!
+}
+
+type Query {
+  albums: [Album!]!
+  albumsPaginated(pagination: QueryPaginationBaseDto!): PaginatedAlbums!
+  album(id: ID!): Album!
+  songs: [Song!]!
+  songsPaginated(pagination: QueryPaginationBaseDto!): PaginatedSongs!
+  songsPaginatedByYear(pagination: QueryPaginationByYearSongsDto!): PaginatedSongs!
+  song(id: ID!): Song!
+  artists: [Artist!]!
+  artistsPaginated(pagination: QueryPaginationBaseDto!): PaginatedArtists!
+  artist(id: ID!): Artist!
+  writers: [Writer!]!
+  writersPaginated(pagination: QueryPaginationBaseDto!): PaginatedWriters!
+  writer(id: ID!): Writer!
+}
+
+input QueryPaginationBaseDto {
+  page: Int = 1
+  limit: Int = 10
+  sort: ESortOrder = DESC
+  field: String = "created"
+  date: DateTime
+  search: String
+}
+
+enum ESortOrder {
+  ASC
+  DESC
+}
+
+input QueryPaginationByYearSongsDto {
+  page: Int = 1
+  limit: Int = 10
+  sort: ESortOrder = DESC
+  field: String = "created"
+  date: DateTime
+  search: String
+  year: Int!
+}
+
+type Mutation {
+  createAlbum(createAlbumInput: CreateAlbumDto!): Album!
+  updateAlbum(id: ID!, updateAlbumInput: UpdateAlbumDto!): Album!
+  removeAlbum(id: ID!): Album!
+  createSong(createSongInput: CreateSongDto!): Song!
+  updateSong(id: ID!, updateSongInput: UpdateSongDto!): Song!
+  removeSong(id: ID!): Song!
+  createArtist(createArtistInput: CreateArtistDto!): Artist!
+  updateArtist(id: ID!, updateArtistInput: UpdateArtistDto!): Artist!
+  removeArtist(id: ID!): Artist!
+  createWriter(createWriterInput: CreateWriterDto!): Writer!
+  updateWriter(id: ID!, updateWriterInput: UpdateWriterDto!): Writer!
+  removeWriter(id: ID!): Writer!
+}
+
+input CreateAlbumDto {
+  title: String!
+  artistIds: [String!] = []
+  songIds: [String!] = []
+  year: Int!
+}
+
+input UpdateAlbumDto {
+  title: String
+  artistIds: [String!] = []
+  songIds: [String!] = []
+  year: Int
+}
+
+input CreateSongDto {
+  title: String!
+  albumIds: [String!]!
+  artistIds: [String!]!
+  featuringArtistIds: [String!]!
+  writerIds: [String!]!
+  year: Int!
+  plays: [PlayDto!]!
+}
+
+input PlayDto {
+  month: DateTime!
+  count: Int!
+}
+
+input UpdateSongDto {
+  title: String
+  albumIds: [String!]
+  artistIds: [String!]
+  featuringArtistIds: [String!]
+  writerIds: [String!]
+  year: Int
+  plays: [PlayDto!]
+}
+
+input CreateArtistDto {
+  name: String!
+}
+
+input UpdateArtistDto {
+  name: String
+}
+
+input CreateWriterDto {
+  name: String!
+}
+
+input UpdateWriterDto {
+  name: String
+}
