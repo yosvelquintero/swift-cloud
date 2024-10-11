@@ -16,7 +16,8 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 
-import { ESortOrder, IPaginationResponse } from '../../types';
+import { ESortOrder, IPaginationResponse } from '@app/types';
+
 import {
   CreateSongDto,
   ParamSongDto,

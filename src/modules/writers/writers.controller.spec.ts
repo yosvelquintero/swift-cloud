@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { IPaginationResponse } from '../../types';
+import { IPaginationResponse } from '@app/types';
+
 import {
   CreateWriterDto,
   ParamWriterDto,

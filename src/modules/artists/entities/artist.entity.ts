@@ -4,9 +4,9 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Document } from 'mongoose';
 import * as uniqueValidator from 'mongoose-unique-validator';
 
-import { DATABASE } from '../../../config';
-import { IArtist } from '../../../types';
-import { getMongooseSchemaOptions } from '../../../utils';
+import { DATABASE } from '@app/config';
+import { IArtist } from '@app/types';
+import { getMongooseSchemaOptions } from '@app/utils';
 
 export type TArtistDocument = Artist & Document;
 

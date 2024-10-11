@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common';
 
-import { DATABASE } from '../../config';
-import { ESortOrder } from '../../types';
+import { DATABASE } from '@app/config';
+import { ESortOrder, IPaginationResponse } from '@app/types';
+
 import { CreateSongDto, UpdateSongDto } from './dto';
+import { TSongDocument } from './entities/song.entity';
 import { SongsRepository } from './songs.repository';
 
 @Injectable()
@@ -23,7 +25,7 @@ export class SongsService {
    *
    * @returns A promise that resolves to the document for the newly created song.
    */
-  async create(createSongDto: CreateSongDto) {
+  async create(createSongDto: CreateSongDto): Promise<TSongDocument> {
     return this.songsRepository.create(createSongDto);
   }
 
@@ -32,7 +34,7 @@ export class SongsService {
    *
    * @returns A promise that resolves to the documents for all songs.
    */
-  async findAll() {
+  async findAll(): Promise<TSongDocument[]> {
     return this.songsRepository.find({}, {}, { populate: this.populateFields });
   }
 
@@ -53,7 +55,7 @@ export class SongsService {
     sort: ESortOrder,
     field: string,
     search?: string,
-  ) {
+  ): Promise<IPaginationResponse<TSongDocument>> {
     const filter = search ? { title: { $regex: search, $options: 'i' } } : {};
     return this.songsRepository.findPaginated(
       filter,
@@ -85,7 +87,7 @@ export class SongsService {
     sort: ESortOrder,
     field: string,
     search?: string,
-  ) {
+  ): Promise<IPaginationResponse<TSongDocument>> {
     const filter = search ? { title: { $regex: search, $options: 'i' } } : {};
     return this.songsRepository.findPaginated(
       { year, ...filter },
@@ -117,7 +119,7 @@ export class SongsService {
     sort: ESortOrder,
     field: string,
     search?: string,
-  ) {
+  ): Promise<IPaginationResponse<TSongDocument>> {
     const filter = search ? { title: { $regex: search, $options: 'i' } } : {};
     return this.songsRepository.findPaginated(
       { albumIds: albumId, ...filter },
@@ -149,7 +151,7 @@ export class SongsService {
     sort: ESortOrder = ESortOrder.DESC,
     field: string = 'totalPlays',
     search?: string,
-  ) {
+  ): Promise<IPaginationResponse<TSongDocument>> {
     const filter = search ? { title: { $regex: search, $options: 'i' } } : {};
     return this.songsRepository.findMostPopular(
       { ...filter },
@@ -170,7 +172,7 @@ export class SongsService {
    *
    * @returns A promise that resolves to the found song.
    */
-  async findOne(id: string) {
+  async findOne(id: string): Promise<TSongDocument> {
     return this.songsRepository.findOne(
       { _id: id },
       {},
@@ -191,7 +193,7 @@ export class SongsService {
     title: string,
     artistIds: string[],
     year: number,
-  ) {
+  ): Promise<TSongDocument> {
     return this.songsRepository.findOne({ title, artistIds, year }, {}, {});
   }
 
@@ -203,7 +205,10 @@ export class SongsService {
    *
    * @returns A promise that resolves to the updated song.
    */
-  async update(id: string, updateSongDto: UpdateSongDto) {
+  async update(
+    id: string,
+    updateSongDto: UpdateSongDto,
+  ): Promise<TSongDocument> {
     return this.songsRepository.findOneAndUpdate({ _id: id }, updateSongDto);
   }
 
@@ -214,7 +219,7 @@ export class SongsService {
    *
    * @returns A promise that resolves to the removed song.
    */
-  async remove(id: string) {
+  async remove(id: string): Promise<TSongDocument> {
     return this.songsRepository.findOneAndDelete({ _id: id });
   }
 }

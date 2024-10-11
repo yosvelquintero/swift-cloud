@@ -1,7 +1,8 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 
-import { IPaginationResponse } from '../../../types';
+import { IPaginationResponse } from '@app/types';
+
 import { Artist, TArtistDocument } from '../entities/artist.entity';
 
 @ObjectType()

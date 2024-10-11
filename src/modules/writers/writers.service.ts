@@ -1,7 +1,9 @@
 import { Injectable } from '@nestjs/common';
 
-import { ESortOrder } from '../../types';
+import { ESortOrder, IPaginationResponse } from '@app/types';
+
 import { CreateWriterDto, UpdateWriterDto } from './dto';
+import { TWriterDocument } from './entities/writer.entity';
 import { WritersRepository } from './writers.repository';
 
 @Injectable()
@@ -15,7 +17,7 @@ export class WritersService {
    *
    * @returns A promise that resolves to the created writer.
    */
-  create(createWriterDto: CreateWriterDto) {
+  create(createWriterDto: CreateWriterDto): Promise<TWriterDocument> {
     return this.writersRepository.create(createWriterDto);
   }
 
@@ -24,7 +26,7 @@ export class WritersService {
    *
    * @returns A promise that resolves to the array of found writers.
    */
-  findAll() {
+  findAll(): Promise<TWriterDocument[]> {
     return this.writersRepository.find({});
   }
 
@@ -45,7 +47,7 @@ export class WritersService {
     sort: ESortOrder,
     field: string,
     search?: string,
-  ) {
+  ): Promise<IPaginationResponse<TWriterDocument>> {
     const filter = search ? { name: { $regex: search, $options: 'i' } } : {};
     return this.writersRepository.findPaginated(
       { ...filter },
@@ -65,7 +67,7 @@ export class WritersService {
    *
    * @returns A promise that resolves to the found writer.
    */
-  findOne(id: string) {
+  findOne(id: string): Promise<TWriterDocument> {
     return this.writersRepository.findOne({ _id: id });
   }
 
@@ -76,7 +78,7 @@ export class WritersService {
    *
    * @returns A promise that resolves to the found writer.
    */
-  async findOneByName(name: string) {
+  async findOneByName(name: string): Promise<TWriterDocument> {
     return this.writersRepository.findOne({ name });
   }
 
@@ -88,7 +90,10 @@ export class WritersService {
    *
    * @returns A promise that resolves to the updated writer.
    */
-  update(id: string, updateWriterDto: UpdateWriterDto) {
+  update(
+    id: string,
+    updateWriterDto: UpdateWriterDto,
+  ): Promise<TWriterDocument> {
     return this.writersRepository.findOneAndUpdate(
       { _id: id },
       updateWriterDto,
@@ -102,7 +107,7 @@ export class WritersService {
    *
    * @returns A promise that resolves to the removed writer.
    */
-  remove(id: string) {
+  remove(id: string): Promise<TWriterDocument> {
     return this.writersRepository.findOneAndDelete({ _id: id });
   }
 }

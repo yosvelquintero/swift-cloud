@@ -1,7 +1,8 @@
 import { Field, InputType, Int } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 
-import { IPaginationResponse } from '../../../types';
+import { IPaginationResponse } from '@app/types';
+
 import { Album, TAlbumDocument } from '../entities/album.entity';
 
 @InputType()

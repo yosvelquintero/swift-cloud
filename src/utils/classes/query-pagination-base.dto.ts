@@ -9,8 +9,8 @@ import {
   Min,
 } from 'class-validator';
 
-import { PAGINATION } from '../../config';
-import { ESortOrder } from '../../types';
+import { PAGINATION } from '@app/config';
+import { ESortOrder } from '@app/types';
 
 @InputType()
 export class QueryPaginationBaseDto {

@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { IPaginationResponse } from '../../../types';
+import { IPaginationResponse } from '@app/types';
+
 import { Song, TSongDocument } from '../entities/song.entity';
 
 export class SongDto implements IPaginationResponse<TSongDocument> {

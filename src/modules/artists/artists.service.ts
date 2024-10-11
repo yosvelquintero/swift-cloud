@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common';
 
-import { ESortOrder } from '../../types';
+import { ESortOrder, IPaginationResponse } from '@app/types';
+
 import { ArtistsRepository } from './artists.repository';
 import { CreateArtistDto, UpdateArtistDto } from './dto';
+import { TArtistDocument } from './entities/artist.entity';
 
 @Injectable()
 export class ArtistsService {
@@ -15,7 +17,7 @@ export class ArtistsService {
    *
    * @returns A promise that resolves to the created artist.
    */
-  create(createArtistDto: CreateArtistDto) {
+  create(createArtistDto: CreateArtistDto): Promise<TArtistDocument> {
     return this.artistsRepository.create(createArtistDto);
   }
 
@@ -24,7 +26,7 @@ export class ArtistsService {
    *
    * @returns A promise that resolves to the array of found artists.
    */
-  findAll() {
+  findAll(): Promise<TArtistDocument[]> {
     return this.artistsRepository.find({});
   }
 
@@ -45,7 +47,7 @@ export class ArtistsService {
     sort: ESortOrder,
     field: string,
     search?: string,
-  ) {
+  ): Promise<IPaginationResponse<TArtistDocument>> {
     const filter = search ? { name: { $regex: search, $options: 'i' } } : {};
     return this.artistsRepository.findPaginated(
       { ...filter },
@@ -65,7 +67,7 @@ export class ArtistsService {
    *
    * @returns A promise that resolves to the found artist.
    */
-  findOne(id: string) {
+  findOne(id: string): Promise<TArtistDocument> {
     return this.artistsRepository.findOne({ _id: id });
   }
 
@@ -76,7 +78,7 @@ export class ArtistsService {
    *
    * @returns A promise that resolves to the found artist.
    */
-  async findOneByName(name: string) {
+  async findOneByName(name: string): Promise<TArtistDocument> {
     return this.artistsRepository.findOne({ name });
   }
 
@@ -88,7 +90,10 @@ export class ArtistsService {
    *
    * @returns A promise that resolves to the updated artist.
    */
-  update(id: string, updateArtistDto: UpdateArtistDto) {
+  update(
+    id: string,
+    updateArtistDto: UpdateArtistDto,
+  ): Promise<TArtistDocument> {
     return this.artistsRepository.findOneAndUpdate(
       { _id: id },
       updateArtistDto,
@@ -102,7 +107,7 @@ export class ArtistsService {
    *
    * @returns A promise that resolves to the removed artist.
    */
-  remove(id: string) {
+  remove(id: string): Promise<TArtistDocument> {
     return this.artistsRepository.findOneAndDelete({ _id: id });
   }
 }

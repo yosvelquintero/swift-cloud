@@ -1,6 +1,6 @@
 import { SchemaOptions } from '@nestjs/mongoose';
 
-import { IGetMongooseSchemaOptionsParams } from '../../types';
+import { IGetMongooseSchemaOptionsParams } from '@app/types';
 
 /**
  * Returns Mongoose schema options.

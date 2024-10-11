@@ -1,9 +1,11 @@
 import { Injectable } from '@nestjs/common';
 
-import { DATABASE } from '../../config';
-import { ESortOrder } from '../../types';
+import { DATABASE } from '@app/config';
+import { ESortOrder, IPaginationResponse } from '@app/types';
+
 import { AlbumsRepository } from './albums.repository';
 import { CreateAlbumDto, UpdateAlbumDto } from './dto';
+import { TAlbumDocument } from './entities/album.entity';
 
 @Injectable()
 export class AlbumsService {
@@ -21,7 +23,7 @@ export class AlbumsService {
    *
    * @returns A promise that resolves to the document for the newly created album.
    */
-  create(createAlbumDto: CreateAlbumDto) {
+  create(createAlbumDto: CreateAlbumDto): Promise<TAlbumDocument> {
     return this.albumsRepository.create(createAlbumDto);
   }
 
@@ -30,7 +32,7 @@ export class AlbumsService {
    *
    * @returns A promise that resolves to the documents for all albums.
    */
-  findAll() {
+  findAll(): Promise<TAlbumDocument[]> {
     return this.albumsRepository.find(
       {},
       {},
@@ -55,7 +57,7 @@ export class AlbumsService {
     sort: ESortOrder,
     field: string,
     search?: string,
-  ) {
+  ): Promise<IPaginationResponse<TAlbumDocument>> {
     const filter = search ? { title: { $regex: search, $options: 'i' } } : {};
     return this.albumsRepository.findPaginated(
       { ...filter },
@@ -75,7 +77,7 @@ export class AlbumsService {
    *
    * @returns A promise that resolves to the found album.
    */
-  findOne(id: string) {
+  findOne(id: string): Promise<TAlbumDocument> {
     return this.albumsRepository.findOne(
       { _id: id },
       {},
@@ -96,7 +98,7 @@ export class AlbumsService {
     title: string,
     artistIds: string[],
     year: number,
-  ) {
+  ): Promise<TAlbumDocument> {
     return this.albumsRepository.findOne({ title, artistIds, year }, {}, {});
   }
 
@@ -108,7 +110,7 @@ export class AlbumsService {
    *
    * @returns A promise that resolves to the updated album.
    */
-  update(id: string, updateAlbumDto: UpdateAlbumDto) {
+  update(id: string, updateAlbumDto: UpdateAlbumDto): Promise<TAlbumDocument> {
     return this.albumsRepository.findOneAndUpdate({ _id: id }, updateAlbumDto);
   }
 
@@ -119,7 +121,7 @@ export class AlbumsService {
    *
    * @returns A promise that resolves to the removed album.
    */
-  remove(id: string) {
+  remove(id: string): Promise<TAlbumDocument> {
     return this.albumsRepository.findOneAndDelete({ _id: id });
   }
 }

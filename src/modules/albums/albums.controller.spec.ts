@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { IPaginationResponse } from '../../types';
+import { IPaginationResponse } from '@app/types';
+
 import { AlbumsController } from './albums.controller';
 import { AlbumsService } from './albums.service';
 import {
