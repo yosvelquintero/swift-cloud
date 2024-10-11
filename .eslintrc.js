@@ -29,6 +29,8 @@ module.exports = {
           ['^\\u0000'],
           // Packages (node_modules)
           ['^@?\\w'],
+          // Local @app imports
+          ['^@app'],
           // Relative imports
           ['^\\.'],
         ],
