@@ -1,5 +1,7 @@
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { GraphQLModule } from '@nestjs/graphql';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { ENV } from './config/constants';
@@ -21,6 +23,10 @@ import { WritersModule } from './modules/writers/writers.module';
         uri: configService.get<string>(ENV.database.mongodb.mongodbUri),
         autoIndex: true,
       }),
+    }),
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      autoSchemaFile: 'schema.gql',
     }),
     AlbumsModule,
     SongsModule,

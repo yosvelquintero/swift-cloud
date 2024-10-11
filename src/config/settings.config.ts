@@ -11,7 +11,31 @@ import { ValidationErrorFilter } from '../filters';
 
 export const settingsConfig = (app: INestApplication, prefix: string): void => {
   // Security middleware using Helmet
-  app.use(helmet());
+  app.use(
+    helmet({
+      contentSecurityPolicy: {
+        directives: {
+          defaultSrc: ["'self'"],
+          scriptSrc: ["'self'", "'unsafe-inline'", 'https://cdn.jsdelivr.net'],
+          styleSrc: ["'self'", "'unsafe-inline'", 'https://cdn.jsdelivr.net'],
+          imgSrc: [
+            "'self'",
+            'data:',
+            'https://cdn.jsdelivr.net',
+            'http://cdn.jsdelivr.net',
+          ],
+          connectSrc: [
+            "'self'",
+            'https://cdn.jsdelivr.net',
+            'wss://localhost:3000',
+          ],
+          fontSrc: ["'self'", 'https://cdn.jsdelivr.net'],
+          objectSrc: ["'none'"],
+          upgradeInsecureRequests: [],
+        },
+      },
+    }),
+  );
 
   // Body Parsing Middleware
   app.use(

@@ -1,3 +1,6 @@
-import { QueryPaginationDto } from '../../../utils';
+import { InputType } from '@nestjs/graphql';
 
-export class QuerySongDto extends QueryPaginationDto {}
+import { QueryPaginationBaseDto } from '../../../utils';
+
+@InputType()
+export class QuerySongDto extends QueryPaginationBaseDto {}

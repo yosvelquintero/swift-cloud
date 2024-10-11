@@ -1,3 +1,4 @@
+import { Field, InputType, Int } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import {
@@ -13,7 +14,9 @@ import {
   ValidateNested,
 } from 'class-validator';
 
+@InputType()
 class PlayDto {
+  @Field(() => Date)
   @ApiProperty({
     description: 'First day of the month',
     example: '2023-06-01T00:00:00Z',
@@ -22,6 +25,7 @@ class PlayDto {
   @Type(() => Date)
   month: Date;
 
+  @Field(() => Int)
   @ApiProperty({
     description: 'Play count for the month',
     example: 100,
@@ -31,7 +35,9 @@ class PlayDto {
   count: number;
 }
 
+@InputType()
 export class CreateSongDto {
+  @Field(() => String)
   @ApiProperty({
     description: 'Title of the song',
     example: 'All Too Well',
@@ -40,6 +46,7 @@ export class CreateSongDto {
   @IsNotEmpty()
   title: string;
 
+  @Field(() => [String])
   @ApiProperty({
     description: 'Array of album IDs',
     type: [String],
@@ -51,6 +58,7 @@ export class CreateSongDto {
   @IsMongoId({ each: true })
   albumIds: string[];
 
+  @Field(() => [String])
   @ApiProperty({
     description: 'Array of artist IDs',
     type: [String],
@@ -61,6 +69,7 @@ export class CreateSongDto {
   @IsMongoId({ each: true })
   artistIds: string[];
 
+  @Field(() => [String])
   @ApiProperty({
     description: 'Array of featuring artist IDs',
     type: [String],
@@ -70,6 +79,7 @@ export class CreateSongDto {
   @IsOptional()
   featuringArtistIds: string[];
 
+  @Field(() => [String])
   @ApiProperty({
     description: 'Array of writer IDs',
     type: [String],
@@ -81,6 +91,7 @@ export class CreateSongDto {
   @IsMongoId({ each: true })
   writerIds: string[];
 
+  @Field(() => Int)
   @ApiProperty({
     description: 'Release year',
     example: 2012,
@@ -90,6 +101,7 @@ export class CreateSongDto {
   @Max(new Date().getFullYear())
   year: number;
 
+  @Field(() => [PlayDto])
   @ApiProperty({
     description: 'Array of play data',
     type: [PlayDto],
