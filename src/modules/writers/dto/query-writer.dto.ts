@@ -1,3 +1,6 @@
-import { QueryPaginationDto } from '../../../utils';
+import { InputType } from '@nestjs/graphql';
 
-export class QueryWriterDto extends QueryPaginationDto {}
+import { QueryPaginationBaseDto } from '../../../utils';
+
+@InputType()
+export class QueryWriterDto extends QueryPaginationBaseDto {}

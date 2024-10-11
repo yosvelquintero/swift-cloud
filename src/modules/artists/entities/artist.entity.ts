@@ -1,3 +1,4 @@
+import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ApiProperty } from '@nestjs/swagger';
 import { Document } from 'mongoose';
@@ -9,12 +10,17 @@ import { getMongooseSchemaOptions } from '../../../utils';
 
 export type TArtistDocument = Artist & Document;
 
+@ObjectType()
 @Schema(
   getMongooseSchemaOptions({
     collection: DATABASE.mongodb.collections.names.artists,
   }),
 )
 export class Artist implements IArtist {
+  @Field(() => ID)
+  id: string;
+
+  @Field()
   @Prop({
     required: true,
     unique: true,
@@ -24,12 +30,14 @@ export class Artist implements IArtist {
   })
   name: string;
 
+  @Field()
   @Prop()
   @ApiProperty({
     description: 'The artist creation',
   })
   created: Date;
 
+  @Field()
   @Prop()
   @ApiProperty({
     description: 'The artist last update',

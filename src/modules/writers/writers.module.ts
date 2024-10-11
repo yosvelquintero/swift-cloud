@@ -4,6 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Writer, WriterSchema } from './entities/writer.entity';
 import { WritersController } from './writers.controller';
 import { WritersRepository } from './writers.repository';
+import { WritersResolver } from './writers.resolver';
 import { WritersService } from './writers.service';
 
 @Module({
@@ -11,7 +12,7 @@ import { WritersService } from './writers.service';
     MongooseModule.forFeature([{ name: Writer.name, schema: WriterSchema }]),
   ],
   controllers: [WritersController],
-  providers: [WritersService, WritersRepository],
+  providers: [WritersService, WritersResolver, WritersRepository],
   exports: [WritersService],
 })
 export class WritersModule {}

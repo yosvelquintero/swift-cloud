@@ -1,5 +1,6 @@
 export * from './artist.dto';
 export * from './create-artist.dto';
+export * from './paginated-artists.dto';
 export * from './param-id-artist.dto';
 export * from './query-artist.dto';
 export * from './update-artist.dto';

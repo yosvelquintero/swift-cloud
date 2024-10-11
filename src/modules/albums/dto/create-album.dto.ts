@@ -1,3 +1,4 @@
+import { Field, InputType, Int } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 import {
   IsArray,
@@ -9,7 +10,9 @@ import {
   Min,
 } from 'class-validator';
 
+@InputType()
 export class CreateAlbumDto {
+  @Field(() => String)
   @ApiProperty({
     description: 'Title of the album',
     example: 'Red',
@@ -17,6 +20,7 @@ export class CreateAlbumDto {
   @IsString()
   title: string;
 
+  @Field(() => [String], { nullable: true, defaultValue: [] })
   @ApiProperty({
     description: 'Array of artist IDs',
     type: [String],
@@ -27,6 +31,7 @@ export class CreateAlbumDto {
   @IsMongoId({ each: true })
   artistIds?: string[];
 
+  @Field(() => [String], { nullable: true, defaultValue: [] })
   @ApiProperty({
     description: 'Array of song IDs',
     type: [String],
@@ -37,6 +42,7 @@ export class CreateAlbumDto {
   @IsMongoId({ each: true })
   songIds?: string[];
 
+  @Field(() => Int)
   @ApiProperty({
     description: 'Release year',
     example: 2012,

@@ -1,3 +1,4 @@
+import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ApiProperty } from '@nestjs/swagger';
 import { Document, Types } from 'mongoose';
@@ -12,12 +13,15 @@ import { getMongooseSchemaOptions } from '../../../utils';
 
 export type TSongDocument = Song & Document;
 
+@ObjectType()
 @Schema()
 export class Play {
+  @Field(() => Date)
   @Prop({ required: true })
   @ApiProperty()
   month: Date;
 
+  @Field(() => Int)
   @Prop({ required: true })
   @ApiProperty()
   count: number;
@@ -25,18 +29,24 @@ export class Play {
 
 const PlaySchema = SchemaFactory.createForClass(Play);
 
+@ObjectType()
 @Schema(
   getMongooseSchemaOptions({
     collection: DATABASE.mongodb.collections.names.songs,
   }),
 )
 export class Song implements ISong {
+  @Field(() => ID)
+  id: string;
+
+  @Field(() => String)
   @Prop({ required: true })
   @ApiProperty({
     description: 'The song title',
   })
   title: string;
 
+  @Field(() => [String])
   @Prop({
     type: [
       {
@@ -47,12 +57,16 @@ export class Song implements ISong {
     default: [],
   })
   @ApiProperty({
-    type: () => [Album],
+    type: () => [String],
     description: 'Array of albums',
     default: [],
   })
   albumIds: Types.ObjectId[];
 
+  @Field(() => [Album], { nullable: true })
+  albums?: Album[];
+
+  @Field(() => [String], { nullable: true, defaultValue: [] })
   @Prop({
     type: [
       {
@@ -63,12 +77,16 @@ export class Song implements ISong {
     default: [],
   })
   @ApiProperty({
-    type: () => [Artist],
+    type: () => [String],
     description: 'Array of artists',
     default: [],
   })
   artistIds: Types.ObjectId[];
 
+  @Field(() => [Artist], { nullable: true })
+  artists?: Artist[];
+
+  @Field(() => [String], { nullable: true, defaultValue: [] })
   @Prop({
     type: [
       {
@@ -79,12 +97,16 @@ export class Song implements ISong {
     default: [],
   })
   @ApiProperty({
-    type: () => [Artist],
+    type: () => [String],
     description: 'Array of featuring artists',
     default: [],
   })
   featuringArtistIds: Types.ObjectId[];
 
+  @Field(() => [Artist], { nullable: true })
+  featuringArtists?: Artist[];
+
+  @Field(() => [String], { nullable: true, defaultValue: [] })
   @Prop({
     type: [
       {
@@ -95,16 +117,21 @@ export class Song implements ISong {
     default: [],
   })
   @ApiProperty({
-    type: () => [Writer],
+    type: () => [String],
     description: 'Array of writers',
     default: [],
   })
   writerIds: Types.ObjectId[];
 
+  @Field(() => [Writer], { nullable: true })
+  writers?: Writer[];
+
+  @Field(() => Int)
   @Prop()
   @ApiProperty()
   year: number;
 
+  @Field(() => [Play])
   @Prop({
     type: () => [PlaySchema],
     default: [],
@@ -116,12 +143,14 @@ export class Song implements ISong {
   })
   plays: Play[];
 
+  @Field(() => Date)
   @Prop()
   @ApiProperty({
     description: 'The song creation',
   })
   created: Date;
 
+  @Field(() => Date)
   @Prop()
   @ApiProperty({
     description: 'The song last update',

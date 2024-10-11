@@ -1,22 +1,28 @@
+import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ApiProperty } from '@nestjs/swagger';
 import { Document, Types } from 'mongoose';
 import * as uniqueValidator from 'mongoose-unique-validator';
 
 import { DATABASE } from '../../../config';
-import { Artist } from '../../../modules/artists/entities/artist.entity';
-import { Song } from '../../../modules/songs/entities/song.entity';
 import { IAlbum } from '../../../types';
 import { getMongooseSchemaOptions } from '../../../utils';
+import { Artist } from '../../artists/entities/artist.entity';
+import { Song } from '../../songs/entities/song.entity';
 
 export type TAlbumDocument = Album & Document;
 
+@ObjectType()
 @Schema(
   getMongooseSchemaOptions({
     collection: DATABASE.mongodb.collections.names.albums,
   }),
 )
 export class Album implements IAlbum {
+  @Field(() => ID)
+  id: string;
+
+  @Field()
   @Prop({
     required: true,
   })
@@ -25,6 +31,7 @@ export class Album implements IAlbum {
   })
   title: string;
 
+  @Field(() => [String])
   @Prop({
     type: [
       {
@@ -35,12 +42,16 @@ export class Album implements IAlbum {
     default: [],
   })
   @ApiProperty({
-    type: () => [Artist],
+    type: () => [String],
     description: 'Array of artists',
     default: [],
   })
   artistIds: Types.ObjectId[];
 
+  @Field(() => [Artist], { nullable: true })
+  artists?: Artist[];
+
+  @Field(() => [String])
   @Prop({
     type: [
       {
@@ -51,24 +62,30 @@ export class Album implements IAlbum {
     default: [],
   })
   @ApiProperty({
-    type: () => [Song],
+    type: () => [String],
     description: 'Array of songs',
     default: [],
   })
   songIds: Types.ObjectId[];
 
+  @Field(() => [Song], { nullable: true })
+  songs?: Song[];
+
+  @Field(() => Int)
   @Prop({})
   @ApiProperty({
     description: 'The album year',
   })
   year: number;
 
+  @Field()
   @Prop()
   @ApiProperty({
     description: 'The album creation',
   })
   created: Date;
 
+  @Field()
   @Prop()
   @ApiProperty({
     description: 'The album last update',
