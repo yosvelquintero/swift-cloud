@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 
 import { AppModule } from './app.module';
-import { ENV, settingsConfig, swaggerConfig } from './config';
+import { ENV, setupAppMiddlewares, swaggerConfig } from './config';
 import { TEnvAppApi } from './types';
 
 async function bootstrap() {
@@ -24,7 +24,7 @@ async function bootstrap() {
   const logger = new Logger(api.name);
   const isSwaggerEnabled = api.isSwaggerEnabled === 'true';
 
-  settingsConfig(app, api.prefix);
+  setupAppMiddlewares(app, api.prefix);
 
   if (isSwaggerEnabled) {
     swaggerConfig(app, api);

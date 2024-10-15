@@ -2,7 +2,7 @@
 export * from './constants';
 
 // Settings
-export * from './settings.config';
+export * from './app.config';
 
 // Swagger
 export * from './swagger.config';
