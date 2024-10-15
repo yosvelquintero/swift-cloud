@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { MongooseModule } from '@nestjs/mongoose';
+import { join } from 'path';
 
 import { ENV } from './config/constants';
 import { AlbumsModule } from './modules/albums/albums.module';
@@ -26,7 +27,8 @@ import { WritersModule } from './modules/writers/writers.module';
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: 'schema.gql',
+      playground: true,
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     }),
     AlbumsModule,
     SongsModule,
