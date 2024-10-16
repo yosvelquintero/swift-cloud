@@ -83,7 +83,7 @@ export abstract class EntityRepository<T extends Document> {
       const totalPromise = this.entityModel.countDocuments(filter).exec();
 
       options = { ...options };
-      options.sort = options.sort || { [field]: sort === 'ASC' ? 1 : -1 };
+      options.sort = options.sort || { [field]: sort === 'asc' ? 1 : -1 };
 
       const query = this.entityModel
         .find(filter, projection, options)

@@ -1,9 +1,9 @@
 export enum ESortOrder {
-  ASC = 'ASC',
-  DESC = 'DESC',
+  ASC = 'asc',
+  DESC = 'desc',
 }
 
 export enum ESortField {
-  CREATED = 'CREATED',
-  UPDATED = 'UPDATED',
+  CREATED = 'created',
+  UPDATED = 'updated',
 }
